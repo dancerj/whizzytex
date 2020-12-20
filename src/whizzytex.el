@@ -133,7 +133,7 @@ Each element of the alist is of the form
 
 where
 
-  <type> can only be \"-advi\", \"-dvi\", \"-nodvi\", \"-ps\", \"-pdf\", \"-kpdf\",  \"-gpdf\" or \"-nopdf\".
+  <type> can only be \"-advi\", \"-dvi\", \"-nodvi\", \"-ps\", \"-pdf\", \"-kpdf\", \"-gpdf\", \"-mupdf\", \"-skim\"  or \"-nopdf\".
 
   <command>
 
@@ -157,7 +157,7 @@ Moreover, <type> and <default-command> should agree in the following way:
     With -advi, the command need to be an ActiveDVI previewer.  See also
     `whizzy-line', and `whizzy-point-visible'.
 
-  -dvi
+  -nodvi
 
     behaves as -dvi but does not launch the previewer (checking only mode).
 
