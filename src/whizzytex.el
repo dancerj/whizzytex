@@ -5,7 +5,7 @@
 ;;               INRIA.
 ;; 
 ;; Author         : Didier Remy <Didier.Remy@inria.fr>
-;; Version        : 1.3.5
+;; Version        : 1.3.6
 ;; Bug Reports    : whizzytex-bugs@inria.fr
 ;; Web Site       : http://gallium.inria.fr/whizzytex
 ;; 
@@ -62,7 +62,7 @@
 (require 'comint)
 (require 'timer)
 
-(defconst whizzytex-version "1.3.5"
+(defconst whizzytex-version "1.3.6"
    "*This tells the version of WhizzyTeX emacs-mode.
 
 It should be the same number as \"whizzytex\" shell script visible from the
@@ -2877,8 +2877,8 @@ the interpretation of the rest of the line:
   The is used for files mastered by another file. That is, it is not
   LaTeX-ed directly, but  loaded by another LaTeX file. Conversely, the
   second and last line are used for master files. For WhizzyTeX, a master
-  file is one that contains a \documentclass command and \begin{document}
-  commands. Other files are treated as mastered.
+  file is one that contains a \\=\\documentclass command and
+  \\=\\begin{document} commands. Other files are treated as mastered.
 
   <name>
      is the relative or fullname of the master file

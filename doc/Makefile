@@ -6,10 +6,11 @@ DOCFORMATS=dvi ps pdf html info
 SHELL = bash
 all: FILES
 
-FILES: $(addprefix whizzytex., dvi ps pdf html info) Makefile
+FILES: $(addprefix whizzytex., dvi ps pdf html info) \
+	Makefile whizzytex.info.head
 	cd ..; \
 	ls $(addprefix doc/whizzytex., dvi ps pdf html info) \
-	   doc/whizzytex00?.png doc/whizzytex.info-* \
+	   doc/whizzytex00?.png doc/whizzytex.info-* doc/whizzytex.info.head \
 	   $(addprefix doc/, $(DOCSOURCES)) \
 	> doc/$@
 
@@ -33,15 +34,22 @@ whizzytex.html: manual.tex manual.hva whizzytex.dvi
 	imagen whizzytex && \
 	$(HEVEA) $(HVAOPT) -o $@ $< 
 
-whizzytex.info: manual.tex
+whizzytex.info: manual.tex whizzytex.info.head
 	$(HEVEA) $(HVAOPT) -info -o $@ $<
+	tail -n +2 $@ | cat whizzytex.info.head - > $@.tmp
+	mv $@.tmp $@
 
 clean:
-	rm -f whizzytex.{log,image.*,h{aux,toc}}
-	rm -f manual.{aux,log,dvi,toc,dview,wiz,fmt}
+	rm -f whizzytex.log whizzytex.image.* whizzytex.haux whizzytex.htoc
+	rm -f manual.aux manual.log manual.dvi manual.toc \
+	      manual.dview manual.wiz manual.fmt
+
+# rm -f whizzytex.{log,image.*,h{aux,toc}}
+# rm -f manual.{aux,log,dvi,toc,dview,wiz,fmt}
 
 distclean: clean
-	rm -f whizzytex.{dvi,ps,pdf,html,info} manual.html
+	rm -f whizzytex.dvi whizzytex.ps whizzytex.pdf whizzytex.html \
+	      whizzytex.info manual.html
 
 # Keep caml.eps and gif files: hard to remake
 
