@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="generator" content="hevea 2.32">
+<style type="text/css">
+.li-itemize{margin:1ex 0ex;}
+.li-enumerate{margin:1ex 0ex;}
+.dd-description{margin:0ex 0ex 1ex 4ex;}
+.dt-description{margin:0ex;}
+.toc{list-style:none;}
+.footnotetext{margin:0ex; padding:0ex;}
+div.footnotetext P{margin:0px; text-indent:1em;}
+.thefootnotes{text-align:left;margin:0ex;}
+.dt-thefootnotes{margin:0em;}
+.dd-thefootnotes{margin:0em 0em 0em 2em;}
+.footnoterule{margin:1em auto 1em 0px;width:50%;}
+.caption{padding-left:2ex; padding-right:2ex; margin-left:auto; margin-right:auto}
+.title{margin:2ex auto;text-align:center}
+.titlemain{margin:1ex 2ex 2ex 1ex;}
+.titlerest{margin:0ex 2ex;}
+.center{text-align:center;margin-left:auto;margin-right:auto;}
+.flushleft{text-align:left;margin-left:0ex;margin-right:auto;}
+.flushright{text-align:right;margin-left:auto;margin-right:0ex;}
+div table{margin-left:inherit;margin-right:inherit;margin-bottom:2px;margin-top:2px}
+td table{margin:auto;}
+table{border-collapse:collapse;}
+td{padding:0;}
+.cellpadding0 tr td{padding:0;}
+.cellpadding1 tr td{padding:1px;}
+pre{text-align:left;margin-left:0ex;margin-right:auto;}
+blockquote{margin-left:4ex;margin-right:4ex;text-align:left;}
+td p{margin:0px;}
+.boxed{border:1px solid black}
+.textboxed{border:1px solid black}
+.vbar{border:none;width:2px;background-color:black;}
+.hbar{border:none;height:2px;width:100%;background-color:black;}
+.hfill{border:none;height:1px;width:200%;background-color:black;}
+.vdisplay{border-collapse:separate;border-spacing:2px;width:auto; empty-cells:show; border:2px solid red;}
+.vdcell{white-space:nowrap;padding:0px; border:2px solid green;}
+.display{border-collapse:separate;border-spacing:2px;width:auto; border:none;}
+.dcell{white-space:nowrap;padding:0px; border:none;}
+.dcenter{margin:0ex auto;}
+.vdcenter{border:solid #FF8000 2px; margin:0ex auto;}
+.minipage{text-align:left; margin-left:0em; margin-right:auto;}
+.marginpar{border:solid thin black; width:20%; text-align:left;}
+.marginparleft{float:left; margin-left:0ex; margin-right:1ex;}
+.marginparright{float:right; margin-left:1ex; margin-right:0ex;}
+.theorem{text-align:left;margin:1ex auto 1ex 0ex;}
+.part{margin:2ex auto;text-align:center}
+</style>
+<title>
+ 
+An Emacs minor-mode  
+for incremental viewing of  
+LATEX documents
+
+
+</title>
+</head>
+<body >
+<!--HEVEA command line is: hevea -exec xxdate.exe -o whizzytex.html manual.tex -->
+<!--CUT STYLE article--><!--CUT DEF section 1 --><p>
+
+<link rel="Top" href="index.html">
+<link rel="Up" href="#htoc">
+<link rel="Contents" href="#htoc">
+<link rel="Section" title="Installation" href="#install">
+<link rel="Section" title="Using WhizzyTeX" href="#using">
+<link rel="Section" title="Manual" href="#manual">
+<link rel="Section" title="Viewers" href="#viewers">
+<link rel="Section" title="Customizing" href="#custom">
+<link rel="Section" title="WhizzyEditing" href="#edit">
+<link rel="Section" title="Implementation" href="#impl">
+
+
+
+
+</p><table class="title"><tr><td style="padding:1ex"><h1 class="titlemain">
+<span style="font-size:xx-large"><span style="font-weight:bold"><span style="color:blue">Whizzy</span></span></span><span style="font-size:xx-large"><span style="font-weight:bold"><span style="color:blue">T<sub>E</sub>X</span></span></span><sup><a id="text1" href="#note1"><span style="font-size:xx-large">*</span></a></sup>
+<br>
+<em>An </em><em><span style="font-weight:bold">Emacs</span></em><em> minor-mode <br>
+for </em><em><span style="font-weight:bold">incremental viewing of</span></em><em> <br>
+</em><em><span style="font-weight:bold">L<sup>A</sup>T<sub>E</sub>X</span></em><em><span style="font-weight:bold"> documents</span></em><em>
+</em>
+</h1><h3 class="titlerest">Didier R&#XE9;my</h3><h3 class="titlerest">Version 1.3.5, June&#XA0;9, 2020</h3></td></tr>
+</table><blockquote class="abstract"><span style="font-weight:bold">Abstract: </span>
+
+<span style="font-weight:bold"><span style="color:blue">Whizzy</span></span><span style="font-weight:bold"><span style="color:blue">T<sub>E</sub>X</span></span>
+is an Emacs minor mode for incrementally
+viewing L<sup>A</sup>T<sub>E</sub>X documents that you are editing.
+It works under Unix with <span style="font-family:monospace">gv</span> and <span style="font-family:monospace">xdvi</span> viewers, but 
+the <a href="http://gallium.inria.fr/advi/">ActiveDVI</a> viewer will
+provide much better visual effects and offer more functionalities.<p>In addition, when used with ActiveDVI, <span style="font-weight:bold"><span style="color:blue">Whizzy</span></span><span style="font-weight:bold"><span style="color:blue">T<sub>E</sub>X</span></span> allows for mouse
+edition of dimensions and floats, which can be used to adjust spaces,
+move or resize objects visually. 
+</p></blockquote><!--TOC section id="sec1" Contents-->
+<h2 id="sec1" class="section">Contents</h2><!--SEC END --><ul class="toc"><li class="li-toc">
+<a href="#sec2">1&#XA0;&#XA0;Installation</a>
+<ul class="toc"><li class="li-toc">
+<a href="#sec3">1.1&#XA0;&#XA0;Requirements</a>
+</li><li class="li-toc"><a href="#sec4">1.2&#XA0;&#XA0;Get the source</a>
+</li><li class="li-toc"><a href="#sec5">1.3&#XA0;&#XA0;Warning!</a>
+</li><li class="li-toc"><a href="#sec6">1.4&#XA0;&#XA0;Customizing the installation</a>
+</li><li class="li-toc"><a href="#sec9">1.5&#XA0;&#XA0;Manual installation</a>
+</li><li class="li-toc"><a href="#sec10">1.6&#XA0;&#XA0;Automatic upgrading (depreciated)</a>
+</li></ul>
+</li><li class="li-toc"><a href="#sec11">2&#XA0;&#XA0;Using WhizzyT<sub>E</sub>X</a>
+<ul class="toc"><li class="li-toc">
+<a href="#sec12">2.1&#XA0;&#XA0;Loading <span style="font-family:monospace">whizzytex.el</span></a>
+</li><li class="li-toc"><a href="#sec13">2.2&#XA0;&#XA0;Quick start</a>
+</li><li class="li-toc"><a href="#sec14">2.3&#XA0;&#XA0;Editing</a>
+</li></ul>
+</li><li class="li-toc"><a href="#sec15">3&#XA0;&#XA0;Error recovery and debugging</a>
+<ul class="toc"><li class="li-toc">
+<a href="#sec16">3.1&#XA0;&#XA0;Errors while WhizzyT<sub>E</sub>X-ing</a>
+</li><li class="li-toc"><a href="#sec17">3.2&#XA0;&#XA0;Error during initialization</a>
+</li><li class="li-toc"><a href="#sec23">3.3&#XA0;&#XA0;Errors while editing</a>
+</li><li class="li-toc"><a href="#sec29">3.4&#XA0;&#XA0;Debugging</a>
+</li></ul>
+</li><li class="li-toc"><a href="#sec30">4&#XA0;&#XA0;On line help</a>
+</li><li class="li-toc"><a href="#sec31">5&#XA0;&#XA0;Configuration</a>
+<ul class="toc"><li class="li-toc">
+<a href="#sec32">5.1&#XA0;&#XA0;Emacs global configuration</a>
+</li><li class="li-toc"><a href="#sec33">5.2&#XA0;&#XA0;File-based configuration</a>
+</li><li class="li-toc"><a href="#sec34">5.3&#XA0;&#XA0;Modes</a>
+</li><li class="li-toc"><a href="#sec35">5.4&#XA0;&#XA0;Viewer types</a>
+</li><li class="li-toc"><a href="#sec36">5.5&#XA0;&#XA0;Configuration via configuration files</a>
+</li><li class="li-toc"><a href="#sec37">5.6&#XA0;&#XA0;Watching other files</a>
+</li><li class="li-toc"><a href="#sec38">5.7&#XA0;&#XA0;Frequency of recompilation</a>
+</li><li class="li-toc"><a href="#sec39">5.8&#XA0;&#XA0;WhizzyT<sub>E</sub>X-ing macro files</a>
+</li><li class="li-toc"><a href="#sec40">5.9&#XA0;&#XA0;Cross-references, page and section numbers</a>
+</li><li class="li-toc"><a href="#sec41">5.10&#XA0;&#XA0;Per session L<sup>A</sup>T<sub>E</sub>X customization</a>
+</li><li class="li-toc"><a href="#sec42">5.11&#XA0;&#XA0;System, user, and local customization</a>
+</li></ul>
+</li><li class="li-toc"><a href="#sec43">6&#XA0;&#XA0;Viewers</a>
+<ul class="toc"><li class="li-toc">
+<a href="#sec44">6.1&#XA0;&#XA0;Viewing with ActiveDVI</a>
+</li><li class="li-toc"><a href="#sec45">6.2&#XA0;&#XA0;Defining your own previewer</a>
+</li><li class="li-toc"><a href="#sec46">6.3&#XA0;&#XA0;Viewing with <span style="font-family:monospace">xpdf</span></a>
+</li></ul>
+</li><li class="li-toc"><a href="#sec47">7&#XA0;&#XA0;Whizzy Effects</a>
+</li><li class="li-toc"><a href="#sec48">8&#XA0;&#XA0;WhizzyEditing</a>
+<ul class="toc"><li class="li-toc">
+<a href="#sec49">8.1&#XA0;&#XA0;Enabling edition with the <span style="font-family:monospace">\adviedit</span> macro</a>
+</li><li class="li-toc"><a href="#sec50">8.2&#XA0;&#XA0;Performing mouse edition under ActiveDVI control</a>
+</li><li class="li-toc"><a href="#sec51">8.3&#XA0;&#XA0;Examples</a>
+</li><li class="li-toc"><a href="#sec52">8.4&#XA0;&#XA0;Writing whizzy-editable macros</a>
+</li></ul>
+</li><li class="li-toc"><a href="#sec53">9&#XA0;&#XA0;A quick overview of the implementation</a>
+<ul class="toc"><li class="li-toc">
+<a href="#sec54">9.1&#XA0;&#XA0;Emacs code</a>
+</li><li class="li-toc"><a href="#sec55">9.2&#XA0;&#XA0;L<sup>A</sup>T<sub>E</sub>X code</a>
+</li><li class="li-toc"><a href="#sec56">9.3&#XA0;&#XA0;Bash code</a>
+</li><li class="li-toc"><a href="#sec57">9.4&#XA0;&#XA0;Interaction between the components</a>
+</li><li class="li-toc"><a href="#sec58">9.5&#XA0;&#XA0;Whizzy edition</a>
+</li></ul>
+</li></ul><p><a id="install"></a></p>
+<!--TOC section id="sec2" Installation-->
+<h2 id="sec2" class="section">1&#XA0;&#XA0;Installation</h2><!--SEC END -->
+<!--TOC subsection id="sec3" Requirements-->
+<h3 id="sec3" class="subsection">1.1&#XA0;&#XA0;Requirements</h3><!--SEC END --><p>WhizzyT<sub>E</sub>X is designed for <code>Unix</code> plateforms<sup><a id="text2" href="#note2">1</a></sup>.</p><p>To use WhizzyT<sub>E</sub>X, you need <span style="font-family:monospace">Emacs</span> or <span style="font-family:monospace">XEmacs</span>, some standard 
+<span style="font-family:monospace">latex</span> distribution, 
+<span style="font-family:monospace">bash</span>, and at least one DVI, Postscript or PDF previewer, such as
+<span style="font-family:monospace">advi</span>, <span style="font-family:monospace">xdvi</span>, or <span style="font-family:monospace">dvips</span> combined with <span style="font-family:monospace">gv</span>, or 
+<span style="font-family:monospace">xpdf</span>.</p><p>WhizzyT<sub>E</sub>X has been developed under Linux but has not been extensively tested
+on other platforms. However, L<sup>A</sup>T<sub>E</sub>X and Emacs are quite portable and
+possible compatibility problem with the bash shell-script should be minor
+and easily fixable. Hence WhizzyT<sub>E</sub>X should work with all distributions of
+<span style="font-family:monospace">latex</span> that are compliant to the standard. </p>
+<!--TOC subsection id="sec4" Get the source-->
+<h3 id="sec4" class="subsection">1.2&#XA0;&#XA0;Get the source</h3><!--SEC END --><p>
+Get the source <span style="font-family:monospace">whizzytex-1.3.5.tgz</span> 
+from the <a href="http://gallium.inria.fr/whizzytex">distribution</a>, 
+uncompress and untar it in some working directory, as follows:
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+gunzip whizzytex-1.3.5.tgz<br>
+tar -xvf whizztex-1.3.5.tar<br>
+cd whizzytex-1.3.5</span>
+</blockquote><p>
+Then, the installation can be automatic (default or customized), or manual.</p>
+<!--TOC subsection id="sec5" Warning!-->
+<h3 id="sec5" class="subsection">1.3&#XA0;&#XA0;Warning!</h3><!--SEC END --><p>
+Many Linux installations make <code>xdvi</code> a shell-script that erroneously
+end with the line <code>xdvi.bin "$@"</code> instead of 
+<code>exec xdvi.bin "$@"</code>. The later is needed to preserve the process 
+id, so that signals sent to <code>xdvi</code> are correctly received and
+handled by <code>xdvi.bin</code>. </p><p>Since correct signal handling is crucial for WhizzyT<sub>E</sub>X, and this problem
+is so common we provide a script to check your configuration with the command
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+./checkconfig
+</span>
+</blockquote><p>
+By default, this check is performed by automatic installation below.</p>
+<!--TOC subsection id="sec6" Customizing the installation-->
+<h3 id="sec6" class="subsection">1.4&#XA0;&#XA0;Customizing the installation</h3><!--SEC END --><p>
+<a id="customizing"></a></p><p>To customize the installation, you can edit 
+<code>Makefile.config</code>, manually.
+You may also use either the command
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+./configure
+</span>
+</blockquote><p>
+This command may be passed arguments to customize your installation.
+Call it with the option <code>-help</code> to see a list of all options.
+By default, the configuration is not interactive. However, you may call it
+with option <code>-helpme</code> to have the script do more guessing for you and
+prompt for choices if needed.</p><p>Note that by default, the Emacs-lisp code whizzytex.el is not
+byte-compiled. You need to pass the option <code>-elc</code> to <code>configure</code> in
+order to byte-compiled it.</p>
+<!--TOC paragraph id="sec7" Checking <span style="font-family:monospace">Makefile.config</span>-->
+<h4 id="sec7" class="paragraph">Checking <span style="font-family:monospace">Makefile.config</span></h4><!--SEC END --><p>A misconfiguration of your installation, or &#X2014;much more subttle&#X2014; a
+misconfiguration of other commands (it appears that some installations wrap
+scripts around standard commands that are sometimes incorrect and break
+their normal advertized interface) may lead to systematic errors when
+launching WhizzyT<sub>E</sub>X. To prevent delaying such obvious errors, some sanity
+checks are done after <code>Makefile.config</code> has been produced and before
+building other files. These include checking for mandatory bindings (useful
+for manual configuration) and for the conformance of <span style="font-family:monospace">initex</span>, <span style="font-family:monospace">latex</span>, and viewers commands to their expected interface.</p><p>Checking viewers interface implies simulating a small WhizzyT<sub>E</sub>X session: a
+small test file is created for which a specializled version of latex format
+is built and used to run L<sup>A</sup>T<sub>E</sub>X on the test file; finally, required
+viewers are tested on the DVI output, which opens windows, temporarily.</p><p>If the sanity check fails, at least part of your configuration is 
+suspicious. If some windows remain opened, your confirguration is likely to
+be erronesous (and so, even if not detected by the script). </p><p>However, if you really know what you are doing, you may bypass the check by
+typing <code>make config.force</code>, which will stamp your <code>Makefile.config</code>
+as correct without checking it. Checking compliance to viewers interface
+is also bypassed if you you do not have a connection to X. Conversely, you
+may force checking manually by typing <code>./checkconfig</code>.</p><p>At the end of customization, proceed as described in Section <a href="#install%2Fautomatic">??</a>.</p>
+<!--TOC paragraph id="sec8" Customization notes-->
+<h4 id="sec8" class="paragraph">Customization notes</h4><!--SEC END --><p>By default, WhizzyT<sub>E</sub>X assumes the standard convention that 
+<code>latex</code> is the command name used to call L<sup>A</sup>T<sub>E</sub>X, 
+<code>initex</code> the command name used to build a new format, and 
+<code>latex</code> is the predefined latex format.</p><p>If your implementation of L<sup>A</sup>T<sub>E</sub>X uses other names, you may redefine the
+variables <code>INITEX</code>, <code>LATEX</code>, and <code>FORMAT</code> accordingly in the
+file <code>Makefile.config</code>.
+For instance, <code>platex</code> could be use the default configuration
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+INITEX = iniptex<br>
+LATEX = platex<br>
+FORMAT = platex<br>
+BIBTEX = jbibtex
+</span>
+</blockquote><p>
+This would be produced directly with the configuration line:
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+./configure -initex iniptex -latex platex -format latex -bibtex jbibtex
+</span>
+</blockquote><p>
+If you wish to run WhizzyT<sub>E</sub>X with several configurations, you must still
+choose a default configuration, but you will still be able to call WhizzyT<sub>E</sub>X
+with another configuration from Emacs (see Section <a href="#configuration.tex">5.2</a>
+below).</p><p>It is possible to load this setup dynamically by creating, for example, 
+by including the following lines: 
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+INITEX = iniptex<br>
+LATEX = platex<br>
+FORMAT = platex<br>
+BIBTEX = jbibtex
+</span>
+</blockquote><p>
+in a configuration file (see Section <a href="#configuration">5.2</a>).</p><p>During the configuration, you must at least choose one default previewer
+type among <code>advi</code>, <code>xdvi</code>, and <code>ps</code>, and at most one default
+previewer for each previewer type you chose. You will still be able to call
+WhizzyT<sub>E</sub>X with other previewers from Emacs, via Emacs configuration (see
+Section
+<a href="#configuration.viewers">5.1</a>). </p>
+<!--TOC subsection id="sec9" Manual installation-->
+<h3 id="sec9" class="subsection">1.5&#XA0;&#XA0;Manual installation</h3><!--SEC END --><p>Since WhizzyT<sub>E</sub>X only need three files to run, installation can also be done
+manually:
+</p><ul class="itemize"><li class="li-itemize"><span style="font-family:monospace">whizzytex.el</span><p>This could be installed in a directory visible by Emacs, but does not need
+to, since you can always use the full path when you load it or declare
+autoload. </p><p>No default location.</p></li><li class="li-itemize"><span style="font-family:monospace">whizzytex</span><p>This file is a bash-shell script that should be executable. There is not
+reason to have it visible from the executable path, since it should not be
+used but with WhizzyT<sub>E</sub>X.</p><p>The variable <span style="font-family:monospace">whizzy-command-name</span> defined in <span style="font-family:monospace">whizzytex.el</span> 
+contains its full path (or just its name if visible from the executable
+path). </p><p>Default value is <code>/usr/local/bin/whizzytex</code></p><p>You may need to adjust the path of <code>bash</code> in the very first line of the
+script, as well as some variables in the manual configuration section of the
+script. </p></li><li class="li-itemize"><span style="font-family:monospace">whizzytex.sty</span><p>This file are <span style="font-family:monospace">latex2e</span> macros. There is no reason to put this visible
+from L<sup>A</sup>T<sub>E</sub>X path, since it should not be used but with WhizzyT<sub>E</sub>X.</p><p>Variable <span style="font-family:monospace">PACKAGE</span> defined in <span style="font-family:monospace">whizzytex</span> 
+the full path (or just the name if the path is visible from L<sup>A</sup>T<sub>E</sub>X. </p><p>Default value is <code>/usr/local/share/whizzytex/latex/whizzytex.sty</code></p></li></ul>
+<!--TOC subsection id="sec10" Automatic upgrading (depreciated)-->
+<h3 id="sec10" class="subsection">1.6&#XA0;&#XA0;Automatic upgrading (depreciated)</h3><!--SEC END --><p>For convenience, the distribution also offers a facility to download and
+upgrade new versions of WhizzyT<sub>E</sub>X (this requires <code>wget</code> to be
+installed). If automatic upgrading does not work, just do it manually.</p><p>All operations should be performed in the WhizzyT<sub>E</sub>X top directory, <em>i.e.</em> where you untar whizzytex for the first time, that is right above the
+directory from were you made the installation. We assume that have 
+created a link to the current version subdirectory: 
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+ln -s whizzytex-1.3.5 whizzytex
+</span>
+</blockquote><p>
+(the manager will then update this link when version changes).
+Alternatively, you can also use the full name <span style="font-family:monospace">whizzytex-1.3.5</span> in
+place of <span style="font-family:monospace">whizzytex</span> below. The main commands are:
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+make -f whizzytex/Manager upgrade <br>
+make -f whizzytex/Manager install
+</span>
+</blockquote><p>
+The command <code>upgrade</code> will successively download the newest version,
+unpack it, copy the configuration of the current version to the newest
+version, and bring the newest version up-to-date. The command <code>install</code>
+will install files of the newest version. </p><p>The following command will (re-)install an old version:
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+make VERSION=&lt;version&gt; download downgrade install
+</span>
+</blockquote><p><a id="using"></a>
+</p>
+<!--TOC section id="sec11" Using WhizzyT<sub>E</sub>X-->
+<h2 id="sec11" class="section">2&#XA0;&#XA0;Using WhizzyT<sub>E</sub>X</h2><!--SEC END --><p>
+<a id="using"></a></p>
+<!--TOC subsection id="sec12" Loading <span style="font-family:monospace">whizzytex.el</span>-->
+<h3 id="sec12" class="subsection">2.1&#XA0;&#XA0;Loading <span style="font-family:monospace">whizzytex.el</span></h3><!--SEC END --><p>Maybe, <span style="font-family:monospace">whizzytex</span> is already installed on your (X)Emacs system, which
+you may check by typing:
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+ESC x whizzytex-mode RET
+</span>
+</blockquote><p>
+If the command is understood, skip this section.
+Otherwise, you should first load the library <code>whizzytex.el</code> or, better,
+declare it autoload. To do this permanently, include the following
+declaration in your Emacs startup file (which probably is <code>~/.emacs</code> if
+you are using <code>Emacs</code>):
+</p><blockquote class="quote"><span style="font-size:small"><span style="font-family:monospace">
+(autoload &#X2019;whizzytex-mode <br>
+"whizzytex" <br>
+"WhizzyTeX, a minor-mode WYSIWIG environment for LaTeX" t)
+</span></span><span style="font-size:small">
+</span></blockquote><p>
+This asumes that <code>whizzytex.el</code> has been installed in your (X)Emacs
+<span style="font-family:monospace">load-path</span>. Otherwise, you may either adjust the load-path
+appropriately, or replace <code>whizzytex</code> by the full path to the file
+<code>whizzytex.el</code>, which depends on your installation and can be
+obtained by typing <span style="font-family:monospace">make where</span> in the installation root directory. For
+instance, if you are using Emacs, the default location for
+<code>whizzytex.el</code> is
+<code>/usr/local/share/whizzytex/lisp/whizzytex.el</code> (but it will be different
+if you are using XEmacs or a customized installation).</p>
+<!--TOC subsection id="sec13" Quick start-->
+<h3 id="sec13" class="subsection">2.2&#XA0;&#XA0;Quick start</h3><!--SEC END --><p>WhizzyT<sub>E</sub>X runs as a minor mode of Emacs to be launched on a L<sup>A</sup>T<sub>E</sub>X Emacs
+buffer. The extension of the buffer should be
+<code>.tex</code>. WhizzyT<sub>E</sub>X also understands <code>.ltx</code> extensions, but gives
+priority to the former when it has to guess the extension. Other extensions
+are possible but not recommended.
+</p><blockquote class="quote"><em>The file attached to the buffer must exists and either be a well-formed
+</em><em>L<sup>A</sup>T<sub>E</sub>X</em><em> source file, or be </em>mastered<em>, </em>i.e.<em> loaded by another
+</em><em>L<sup>A</sup>T<sub>E</sub>X</em><em> source file. Thus, whenever the buffer does not contain a
+</em><code><em>\begin{document}</em></code><em> command), </em><em>Whizzy</em><em>T<sub>E</sub>X</em><em> will search for its master file,
+asking the user if need be, so as to first launch itself on a buffer
+visiting the master file. In particular, an empty buffer will be considered
+as beeing mastered, which may not be what you intend.
+</em></blockquote><p>
+To start WhizzyT<sub>E</sub>X on either kind of buffer, type:
+</p><blockquote class="quote">
+<span style="font-family:monospace">
+ESC x whizzytex-mode RET
+</span>
+</blockquote><p>
+By default, this should add new bindings so that you can later turn mode
+on and off with key strokes <span style="font-family:monospace">C-c C-w</span>. This will also add a new menu
+<span style="font-family:monospace">Whizzy</span> in the menu bar call &#X201C;the&#X201D; menu below. (If you are using 
+the <span style="font-family:monospace">auctex</span>, your may use other configuration key strokes to avoid
+clashes (see online emacs-help). </p><p>When <span style="font-family:monospace">whizzytex-mode</span> is started for the first time on a new buffer, it
+attempts to configure buffer local variables automatically by examining
+the content of file, and using default values of global bindings.</p><p>You may customize default settings globally by running appropriate
+hooks or locally by inserting appropriate comments in the source file &#X2014;see
+the manual below. </p><p>You may also change the settings interactively using the menu, or tell
+whizzytex-mode to prompt the user for confirmation of file configuration by
+passing prefix argument 4 (using, for instance, key sequence 
+<code>C-u C-c C-w</code>). </p>
+<!--TOC subsection id="sec14" Editing-->
+<h3 id="sec14" class="subsection">2.3&#XA0;&#XA0;Editing</h3><!--SEC END --><p>Once <span style="font-family:monospace">whizzytex-mode</span> is on, just type in as usual. WhizzyT<sub>E</sub>X should work
+transparently, refreshing the presentation as you type or move into your
+L<sup>A</sup>T<sub>E</sub>X buffer. </p><p>Additionally, a gray overlay is put outside of the current slice (the <em>slice</em> is the region of your buffer under focus, which is automatically
+determined by WhizzyT<sub>E</sub>X). When a L<sup>A</sup>T<sub>E</sub>X error occurs and it can be
+localized in the source buffer, a yellow overlay also is put on the region
+around the error, and removed when the error is fixed.</p><p>Furthermore, when an error is persistent for several slices or some amount
+of time, the interaction-buffer will pop up with the error log
+(this option can be toggled with the <span style="font-family:monospace">Auto interaction</span> menu entry). </p><p>The buffer mode line also displays a brief summary of
+WhizzyT<sub>E</sub>X&#X2019;s status. When <code>whizzytex-mode</code> is on, the line contain
+<code>Whizzy</code>.<span style="font-style:italic">n</span> where <span style="font-style:italic">n</span> is a numeric indication of the load in number
+of buffer changes between two slices (so the higher, the slower). </p><p>However, <code>Whizzy</code>.<span style="font-style:italic">n</span> is changed to <code>Whizzy-</code><span style="font-style:italic">e</span> where <span style="font-style:italic">err</span> range
+over <code>FORMAT</code>, <code>LATEX</code>, or <code>SLICE</code> an indicates that while
+formating or L<sup>A</sup>T<sub>E</sub>Xing the full document, or while recompiling the current
+slice. Errors have priority in this order. That is, if there is both an
+error in the format and the slice, only the <code>FORMAT</code> error will be
+repported.</p><p>When a <code>SLICE</code> error occurs, emacs attempts to locate the error
+and overlay the region that caused the error. (This identifies the 
+text around which the error was detected by L<sup>A</sup>T<sub>E</sub>X, which may not be the 
+text that caused the error.) One can jump to the current error location by
+calling the <span style="font-family:monospace">Jump to error</span> menu emty (or the equivalent key
+sequence). </p>
+<!--TOC section id="sec15" Error recovery and debugging-->
+<h2 id="sec15" class="section">3&#XA0;&#XA0;Error recovery and debugging</h2><!--SEC END --><p>WhizzyT<sub>E</sub>X makes a good attempt at doing everything automatically. 
+However, there remain situations where the user need to understand 
+WhizzyT<sub>E</sub>X &#X2014;when WhizzyT<sub>E</sub>X does not seem to understand the user anymore. </p>
+<!--TOC subsection id="sec16" Errors while WhizzyT<sub>E</sub>X-ing-->
+<h3 id="sec16" class="subsection">3.1&#XA0;&#XA0;Errors while WhizzyT<sub>E</sub>X-ing</h3><!--SEC END --><p>Quite often, the error overlay is sufficient to fix a latex source error. 
+Actually, the error overaly may just indicate that you are in the middle of
+typing a command or an environment, in which cases WhizzyT<sub>E</sub>X will indicate
+temporarily report an undefined command or and ill-balanced environment. 
+Whether an overlay is ephemerous and mean an incomplete edition or 
+persistent and mean a real L<sup>A</sup>T<sub>E</sub>X error is usually unambiguous. 
+In addition, because WhizzyT<sub>E</sub>Xing is dynamic and the error is repported
+immediately it is usually easier to fix a real error than it would be in a
+batch compilation, and without even looking at the error message.</p><p>Indeed, WhizzyT<sub>E</sub>X also display the L<sup>A</sup>T<sub>E</sub>X error message
+(and other processsing messages) in its interaction buffer.
+The interaction buffer is named from the master file name surrounded
+by <code>*</code> characters. By default, the interaction buffer appears
+in a pop up window a few seconds after an error persists and is pop down
+when the error disapears. </p><p>For serious debugging, you may unset <span style="font-family:monospace">Auto interaction</span> menu entry so as
+to see the interaction buffer permanently. You may also unset <span style="font-family:monospace">Auto
+Shrink output</span> menu entry to keep all log information (by default, the
+interaction window is shrunk at every slice).</p><p>The <span style="font-family:monospace">View Log...</span> menu entry can be used to view the compele log files of
+last actions performed by whizzytex (<code>format</code>, <code>latex</code>,
+<code>slice</code>). </p>
+<!--TOC subsection id="sec17" Error during initialization-->
+<h3 id="sec17" class="subsection">3.2&#XA0;&#XA0;Error during initialization</h3><!--SEC END --><p>The most delicate part of WhizzyT<sub>E</sub>X is when starting <span style="font-family:monospace">whizzytex-mode</span>,
+and usually for the first time in a new buffer, since at that time all kinds
+of initialization errors may occur (in addition to L<sup>A</sup>T<sub>E</sub>X errors. </p><p>WhizzyT<sub>E</sub>X will attempt to identify the error and report appropriate messages
+in the interaction buffer. (In case an error occurs &#X2014;or nothing happens&#X2014;
+always have a look at the interaction buffer first, even if it did not
+prompt automatically.)</p><p>WhizzyT<sub>E</sub>X keeps more debugging information during initialization phase, 
+and if an error occurs during initialization, it will keep all log files.
+Once initialization has succeeded WhizzyT<sub>E</sub>X turns into normal more and
+by default all log and auxiliary files will be removed error et exit
+(including at exit on error). However, WhizzyT<sub>E</sub>X can also be launched in
+debug more, which will keep additional debugging information including 
+after initialization. </p><p>To see log information, use the <code>View log...</code> menu entry 
+and the completion buffer. Available log files are <code>command</code>, 
+<code>format</code>, <code>latex</code>, <code>slice</code>, and <code>view</code>.
+The command log is simple the list of arguments&#X2014;one per line&#X2014;with which
+the shell script <code>whizzytex</code> was called; the log file view is the
+content of the standard error description the viewer. Some logs may not be
+available if an error occured before the corresponding command has been
+called. </p><p>Most frequent errors are described below, in chronological order.</p>
+<!--TOC paragraph id="sec18" Emacs fails during setup-->
+<h4 id="sec18" class="paragraph">Emacs fails during setup</h4><!--SEC END --><p>This is the easiest case, because WhizzyT<sub>E</sub>X has not been called yet, so it
+is only involves debugging under emacs. 
+You may check the emacs error messages (emacs buffer <code>*Messages*</code>),
+check the on-line documentatino of variables set or functions calls, and
+in case of uncaught fatal errors, you may
+<code>ESC X toggle-debug-on-error</code> to get help from Emacs, and try to fix
+the problem. </p><p>Note that setup may succeed, but not be result as expected. 
+You may see what configuration files have been loaded in different buffers: 
+<code>*Message*</code> for emacs customization, the interaction buffer 
+for shell-script customozation, and the format log file for latex
+configuration.</p>
+<!--TOC paragraph id="sec19" Emacs cannot find whizzytex-->
+<h4 id="sec19" class="paragraph">Emacs cannot find whizzytex</h4><!--SEC END --><p>This should typically be an installation problem, where the variable
+<code>whizzytex-command-name</code> is erroneous (maybe you need to give the full
+path). Try to evaluate <code>(shell-command whizzy-command-name)</code> in the
+minibuffer, which of course should fail, but only after the command has been
+reached.</p>
+<!--TOC paragraph id="sec20" WhizzyT<sub>E</sub>X cannot build a format-->
+<h4 id="sec20" class="paragraph">WhizzyT<sub>E</sub>X cannot build a format</h4><!--SEC END --><p>Then WhizzyT<sub>E</sub>X will refuse to start. </p><p>The problem could result from an abnormal interaction between your macros
+and WhizzyT<sub>E</sub>X macros, but this situation seems rather unfrequent. So there
+is most probably an error in your macros. Try to compile L<sup>A</sup>T<sub>E</sub>X your
+file. </p><p>By default the interaction window will pop-up with an section of the format
+log, but you can also view the log of latex formatting </p><p>. If this is not enough, you may need view log files. However, log
+files are normally removed when WhizzyT<sub>E</sub>X exits. To keep log files on,
+you must retart WhizzyT<sub>E</sub>X in debug mode (select the debug mode in the
+menu and restart WhizzyT<sub>E</sub>X). Then, you can check the <code>format</code> log and
+if necessary the <code>command</code> with which WhizzyT<sub>E</sub>X has been launched.
+(Once the bug is fixed, you should switch off the debug mode, which may slow
+down WhizzyT<sub>E</sub>X.)</p>
+<!--TOC paragraph id="sec21" WhizzyT<sub>E</sub>X cannot launch the previewer-->
+<h4 id="sec21" class="paragraph">WhizzyT<sub>E</sub>X cannot launch the previewer</h4><!--SEC END --><p>Usually, this is because whizzytex received wrong previewer parameter. See
+the command echoed in the interaction buffer or try to evaluate
+<code>(whizzy-get whizzytex-view-mode)</code>.</p>
+<!--TOC paragraph id="sec22" Other errors-->
+<h4 id="sec22" class="paragraph">Other errors</h4><!--SEC END --><p>There are two remaining problems that could happen at launch time, but that
+are not particular to launch time: WhizzyT<sub>E</sub>X could not recompiled the whole 
+document or the current slice. However, these should not be fatal. 
+In the former case, whizzytex will proceed, ignoring the whole document 
+(or using the slice instead if you are in duplex mode). In the later case,
+whizzytex will replace the slice by an empty slice &#X2014;and print a welcoming
+document, as if you launched WhizzyT<sub>E</sub>X outside of any slice. </p>
+<!--TOC subsection id="sec23" Errors while editing-->
+<h3 id="sec23" class="subsection">3.3&#XA0;&#XA0;Errors while editing</h3><!--SEC END --><p>After initialization time, WhizzyT<sub>E</sub>X will keep recompiling slices as you
+type or move, but also recompiles the format and the whole document when you
+save a file. Each of this step may failed, but this should not be fatal, and
+Emacs should report the error, possible pop up the interaction window, and
+continue. </p>
+<!--TOC paragraph id="sec24" WhizzyT<sub>E</sub>X fails on the current slice-->
+<h4 id="sec24" class="paragraph">WhizzyT<sub>E</sub>X fails on the current slice</h4><!--SEC END --><p>This should not be considered as an error, it <span style="font-weight:bold">must</span> happen during
+edition. In particular, WhizzyT<sub>E</sub>X is not much aware of L<sup>A</sup>T<sub>E</sub>X and could
+very well slice in the middle of the typesetting of an environment or a
+macro command. This should not matter, since the erroneous slice will be
+ignore temporarily until the slice is correct again.</p>
+<!--TOC paragraph id="sec25" WhizzyT<sub>E</sub>X keeps failing on the current slice-->
+<h4 id="sec25" class="paragraph">WhizzyT<sub>E</sub>X keeps failing on the current slice</h4><!--SEC END --><p>The slice can also be erroneous because the Emacs did not correctly inferred
+where to insert the cursor, which may slice erroneous, although what you
+typed is correct. Hopefully, this will not occur too often, and disappear as
+you move the point. It should also disappear if you switch off both <span style="font-family:monospace">Point visible</span> and <span style="font-family:monospace">Page to Point</span> options, which is actually a good
+thing to do when you suspect some misbehavior. This will make WhizzyTeX
+more robust, but less powerful and more boring.</p>
+<!--TOC paragraph id="sec26" WhizzyT<sub>E</sub>X does not seem to slice at all-->
+<h4 id="sec26" class="paragraph">WhizzyT<sub>E</sub>X does not seem to slice at all</h4><!--SEC END --><p>The interaction window does not produce any output. 
+Try to move in the slice, or to another slice. </p><p>If nothing happens, check the interaction
+window, to see if it did attempt to recompile the slice.
+If nothing happens in the interaction window, check for Emacs messages
+(in the <code>*Messages*</code> buffer). You may also check for the presence 
+(and content) of the slice by visiting 
+<code>_whizzy_filename.tex</code> or
+</p><blockquote class="quote">
+<pre class="verbatim">_whizzy_filename/input/_whizzy_name.new
+</pre>
+</blockquote><p>
+If neither file exists, it means that Emacs did
+not succeed to slice, which you may force by evaluating
+<code>(whizzy-observe-changes t)</code>. 
+This can be run in even if <span style="font-family:monospace">whizzytex-mode</span> is suspended, which may
+avoid automatic processing of slices, and their erasure.</p><p>If the slice is present, you may try to compile it by hand (outside of
+Emacs) with 
+</p><blockquote class="quote">
+<pre class="verbatim">latex '&amp;_whizzy_filename' _whizzy_filename.tex
+</pre>
+</blockquote><p>
+and see if it succeeds. </p>
+<!--TOC paragraph id="sec27" Reformatting failed-->
+<h4 id="sec27" class="paragraph">Reformatting failed</h4><!--SEC END --><p>Formatting errors are fatal during initialization, but accepted once
+initialized. In case of an error during reformatting, WhizzyT<sub>E</sub>X will ignore
+the error and continue with the old format. This means that new macros may
+be ignored leading to further slicing errors. When rebuilding the format
+failed, the mode-line string will display the suffix <code>FMT</code> until the
+error is fixed. See the interaction buffer or select <code>format</code> from the
+<code>log...</code> menu entry).</p><p>You may also force reformatting by typing the <code>reformat</code> command
+in the interaction buffer. </p>
+<!--TOC paragraph id="sec28" Whizzytex cannot process the whole document-->
+<h4 id="sec28" class="paragraph">Whizzytex cannot process the whole document</h4><!--SEC END --><p>This is very likely a problem with you document, so try to L<sup>A</sup>T<sub>E</sub>X it 
+first. There is a small possibility of strange interaction between
+your macros and WhizzyT<sub>E</sub>X package. Try to turn options 
+<span style="font-family:monospace">Page to Point</span> and <span style="font-family:monospace">Point visible</span> off and retry. 
+This will make WhizzyT<sub>E</sub>X more robust (but also less powerful and more
+boring). </p>
+<!--TOC subsection id="sec29" Debugging-->
+<h3 id="sec29" class="subsection">3.4&#XA0;&#XA0;Debugging</h3><!--SEC END --><p>If you are still completely lost after trying all of the above help, you may
+turn on the debugging mode by typing either line in the interaction window:
+</p><blockquote class="quote">
+<pre class="verbatim">trace on
+trace off
+</pre>
+</blockquote><p>
+or with the menu entry <code>Debug</code>.
+The entry can also be called to start WhizzyT<sub>E</sub>X, which will then start in 
+debugging mode, including during initialization. </p><p>If need be, you can also turn emacs debug mode on and off with
+</p><blockquote class="quote">
+<pre class="verbatim">ESC x toggle-debug-on-error RET
+</pre>
+</blockquote><p>If you are still stuck, then you are left on your own and need real
+debugging. If this is your first attempt at WhizzyT<sub>E</sub>X, you should suspect
+your global configuration. You should then try it first with the examples of
+the distribution. Otherwise, you may rollback to a file and configuration
+that used to work (e.g. one of the distribution), and make incremental or
+logarithmic changes until you hit the problem. </p><p><a id="help"></a>
+</p>
+<!--TOC section id="sec30" On line help-->
+<h2 id="sec30" class="section">4&#XA0;&#XA0;On line help</h2><!--SEC END --><p>The Emacs source is fully documented and most of the documentation is
+available as on-line Emacs help, through the <code>Help</code> entry of the
+<code>Whizzy</code> menu and following hyperlinks.
+Alternatively, you can type
+</p><blockquote class="quote">
+<pre class="verbatim">ESC x describe-function RET whizzytex-mode RET
+</pre>
+</blockquote><p>
+(In XEmacs, you may need to use
+</p><blockquote class="quote">
+<pre class="verbatim">ESC x hyper-describe-function RET whizzytex-mode RET
+</pre>
+</blockquote><p>
+instead of <code>describe-function</code> to see hyper-links.)</p><p>To avoid redundancy, on-line help is not reproduced here, configuration
+described in the next section.</p><p><a id="manual"></a>
+</p>
+<!--TOC section id="sec31" Configuration-->
+<h2 id="sec31" class="section">5&#XA0;&#XA0;Configuration</h2><!--SEC END --><p> 
+<a id="manual"></a></p><p>This section describes how to use and parameterize WhizzyT<sub>E</sub>X. 
+Section <a href="#configuration">5.2</a>, <a href="#modes">5.3</a> and
+<a href="#types">5.4</a> are also available as online help. </p>
+<!--TOC subsection id="sec32" Emacs global configuration-->
+<h3 id="sec32" class="subsection">5.1&#XA0;&#XA0;Emacs global configuration</h3><!--SEC END --><p><a id="configuration.viewers"></a>
+<a id="configuration.bindings"></a>
+<a id="Emacs-configuration"></a></p><p>See Emacs help for <code>whizzy-default-bindings</code> and
+<code>whizzytex-mode-hook</code> for list of bindings.</p><p>The Emacs on-line help for <code>whizzytex-mode</code> lists all user-configurable
+variables, which may be given default values in your Emacs startup file
+to be used instead of WhizzyT<sub>E</sub>X own default values. </p>
+<!--TOC subsection id="sec33" File-based configuration-->
+<h3 id="sec33" class="subsection">5.2&#XA0;&#XA0;File-based configuration</h3><!--SEC END --><p><a id="configuration"></a>
+<a id="File-configuration"></a></p><p>WhizzyT<sub>E</sub>X allows for inlined customization in the source file, as described
+below. While this mecanism is quit convenient for short and simple
+customization (such as selecting the output format and previewer or
+sectioning), it is harsh and <em>depreciated</em> for advanced customization,
+for which you should prefer local customozation files (see Section&#XA0;<a href="#sec%2Flocal-custom">5.11</a>). </p><p>A configuration line is one that starts with regexp prefix &#X201C;<code>^%; +</code>&#X201D;
+followed by a configuration keyword. If two configuration lines have the same
+keyword, only the first one is considered. The argument of a configuration
+line is the rest of the line stripped of its white space.</p><p>The keywords are:
+</p><dl class="description"><dt class="dt-description">
+<span style="font-weight:bold">whizzy-master</span></dt><dd class="dd-description">&#X27E8;<span style="font-family:monospace">master</span>&#X27E9;
+<br>
+This only makes sense for a file loaded by a <em>master</em> file. 
+&#X27E8;<span style="font-family:monospace">master</span>&#X27E9; is the relative or full name of the
+master file. Optional surrounding quotes (character <code>"</code>) stripped off, so that <code>"foo.tex"</code> and <code>foo.tex</code> are equivalent.</dd><dt class="dt-description"><span style="font-weight:bold">whizzy-macros</span></dt><dd class="dd-description">&#X27E8;<span style="font-family:monospace">master</span>&#X27E9;
+<br>
+ This is equivalent to <span style="font-weight:bold">whizzy-master</span> &#X27E8;<span style="font-family:monospace">master</span>&#X27E9;, but for a file
+containing macros. The file is not sliced while editing, but 
+saving it reformats the master. </dd><dt class="dt-description"><span style="font-weight:bold">whizzy</span></dt><dd class="dd-description"> 
+[ &#X27E8;<span style="font-family:monospace">slicing</span>&#X27E9; ] 
+[ &#X27E8;<span style="font-family:monospace">viewer</span>&#X27E9; [ &#X27E8;<span style="font-family:monospace">command</span>&#X27E9; ] ]<br>
+[ <span style="font-family:monospace">-mkslice</span> &#X27E8;<span style="font-family:monospace">command</span>&#X27E9; ] 
+[ <span style="font-family:monospace">-mkfile</span> &#X27E8;<span style="font-family:monospace">command</span>&#X27E9; ] <br>
+[ <span style="font-family:monospace">-tex</span> &#X27E8;<span style="font-family:monospace">suffix</span>&#X27E9; ] 
+[ <span style="font-family:monospace">-initex</span> &#X27E8;<span style="font-family:monospace">initex</span>&#X27E9; ]
+[ <span style="font-family:monospace">-latex</span> &#X27E8;<span style="font-family:monospace">latex</span>&#X27E9; ]
+[ <span style="font-family:monospace">-fmt</span> &#X27E8;<span style="font-family:monospace">format</span>&#X27E9; ]<br>
+[ <span style="font-family:monospace">-bibtex</span> &#X27E8;<span style="font-family:monospace">bibtex</span>&#X27E9; ]
+[ <span style="font-family:monospace">-dvicopy</span> &#X27E8;<span style="font-family:monospace">command</span>&#X27E9; ]
+[ <span style="font-family:monospace">-watch</span> ]
+[ <span style="font-family:monospace">-duplex</span> ]
+[ <span style="font-family:monospace">-trace</span> ]
+<br>
+All arguments are optional, but if present they must appear in order and on
+a single line:
+<dl class="description"><dt class="dt-description">
+&#X27E8;<span style="font-family:monospace">slicing</span>&#X27E9;</dt><dd class="dd-description"><br>
+determines the way the document is sliced
+(see section&#XA0;<a href="#modes">5.3</a>).</dd><dt class="dt-description">&#X27E8;<span style="font-family:monospace">viewer</span>&#X27E9;</dt><dd class="dd-description"><br>
+is the type of viewer and can only be one of 
+<code>-advi</code>, <code>-xdvi</code>, <code>-ps</code>, or <code>-pdf</code> (see section&#XA0;<a href="#types">5.4</a>)</dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-display</span></span><span style="font-weight:bold"> </span>&#X27E8;<span style="font-family:monospace">display</span>&#X27E9;</dt><dd class="dd-description"><br>
+specifies which X display to show the DVI previewer in,
+such as <span style="font-family:monospace">:0.1</span> for multidisplay set-ups.</dd><dt class="dt-description">&#X27E8;<span style="font-family:monospace">command</span>&#X27E9;</dt><dd class="dd-description"><br>
+is optional and is the command used to call the viewer
+(of course, it should agree with &#X27E8;<span style="font-family:monospace">viewer</span>&#X27E9;). </dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-mkslice</span></span><span style="font-weight:bold"> </span>&#X27E8;<span style="font-family:monospace">command</span>&#X27E9;</dt><dd class="dd-description"><br>
+tells WhizzyT<sub>E</sub>X to use &#X27E8;<span style="font-family:monospace">command</span>&#X27E9; to preprocess the slice. 
+The command &#X27E8;<span style="font-family:monospace">command</span>&#X27E9; will receive only one argument
+which is the slice to be produced <span style="font-family:monospace">_whizzy_basename.tex</span> 
+(or <span style="font-family:monospace">_whizzy_basename.ltx</span> if the extension of the master file is 
+<span style="font-family:monospace">.ltx</span>) from the original <span style="font-family:monospace">_whizzy_basename.new</span> 
+(whose name is obtained by replacing the suffix ".tex" or ".ltx" by ".new")
+By default, the command <code>mv</code> is used to move the original to the
+destination. (See the example in <code>./examples/gpic/</code>)<p><em>The Unix </em><code><em>make</em></code><em> can itself be used as a preprocessor (with an
+appropriate </em><code><em>Makefile</em></code><em>). However, one may have to work around
+</em><code><em>make</em></code><em>&#X2019;s notion of time (using FORCE), which is usually too rough. 
+This is safe, since </em><em>Whizzy</em><em>T<sub>E</sub>X</em><em> tests itself for needed recompilations.</em></p></dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-mkfile</span></span><span style="font-weight:bold"> </span>&#X27E8;<span style="font-family:monospace">command</span>&#X27E9;</dt><dd class="dd-description"><br>
+executes &#X201C;&#X27E8;<span style="font-family:monospace">command</span>&#X27E9; &#X27E8;<span style="font-family:monospace">filename</span>&#X27E9;&#X201D; before recompiling every time a
+buffer is saved. The argument &#X201C;&#X27E8;<span style="font-family:monospace">filename</span>&#X27E9;&#X201D; is the buffer-file-name
+path relative to the path of the master file directory.</dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-makeindex</span></span><span style="font-weight:bold"> </span>&#X27E8;<span style="font-family:monospace">command</span>&#X27E9;</dt><dd class="dd-description"><br>
+uses &#X201C;&#X27E8;<span style="font-family:monospace">command</span>&#X27E9; &#X27E8;<span style="font-family:monospace">filename.idx</span>&#X27E9;&#X201D; for rebuilding the index instead
+the default &#X201C;&#X27E8;<span style="font-family:monospace">makeindex</span>&#X27E9; &#X27E8;<span style="font-family:monospace">filename.idx</span>&#X27E9;&#X201D;. If &#X201C;&#X27E8;<span style="font-family:monospace">command</span>&#X27E9;&#X201D; is
+false, then do not attempt to rebuild the index.</dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-bibtex </span></span>&#X27E8;<span style="font-family:monospace">bibtex</span>&#X27E9;</dt><dd class="dd-description"><p>uses &#X27E8;<span style="font-family:monospace">bibtex</span>&#X27E9; for the bibtex command instead of the value 
+assign to BIBTEX in <code>Makefile.config</code> (or <code>whizzytex</code>)</p></dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-initex </span></span>&#X27E8;<span style="font-family:monospace">initex</span>&#X27E9;</dt><dd class="dd-description"><p>uses &#X27E8;<span style="font-family:monospace">initex</span>&#X27E9; for the initex command instead of the value 
+assign to INITEX in <code>Makefile.config</code> (or <code>whizzytex</code>)</p></dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-latex </span></span>&#X27E8;<span style="font-family:monospace">latex</span>&#X27E9;</dt><dd class="dd-description"><p>uses &#X27E8;<span style="font-family:monospace">latex</span>&#X27E9; for the latex command instead of the value 
+assign to LATEX in <code>Makefile.config</code> (or <code>whizzytex</code>)</p></dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-fmt </span></span>&#X27E8;<span style="font-family:monospace">format</span>&#X27E9;</dt><dd class="dd-description"><p>uses &#X27E8;<span style="font-family:monospace">format</span>&#X27E9; for the latex format instead
+of the default value, usually fmt (see configuration).</p><p><em>This can either be used in combination with </em><code><em>-latex</em></code><em> and
+</em><code><em>-initex</em></code><em>, 
+or alone. For instance,
+</em><code><em>hugelatex</em></code><em> could be used (depending on your </em><em>L<sup>A</sup>T<sub>E</sub>X</em><em> configuration) to
+build a larger format to process huge files.</em>
+<a id="configuration.tex"></a></p></dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-dvicopy </span></span>&#X27E8;<span style="font-family:monospace">command</span>&#X27E9;</dt><dd class="dd-description"><a id="sec/dvicopy"></a><p>uses &#X27E8;<span style="font-family:monospace">command</span>&#X27E9; instead of the default (mv) to copy DVI files
+(from <code>FILE.dvi</code> to <code>FILE.wdvi</code>). This can be used with command
+<code>dvicopy</code> so as to expand virtual font, which advi does not understand
+yet) </p></dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-watch</span></span></dt><dd class="dd-description"><br>
+watches other files than just the slice (see Section&#XA0;<a href="#sec%2Fwatch">5.6</a>).</dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-duplex</span></span></dt><dd class="dd-description"><br>
+launches another window with the whole document (which is
+recompiled every time the source buffer is saved).<p><em>With </em><code><em>-advi</em></code><em> previewers, both views communicate with Emacs and can be
+used to navigate through source buffers and positions.</em></p></dd><dt class="dt-description"><span style="font-weight:bold"><span style="font-family:monospace">-trace</span></span></dt><dd class="dd-description"><br>
+traces all script commands (for debugging purposes only.)
+<a id="configuration.trace"></a></dd></dl><p>For instance, a typical configuration line will be:
+</p><pre class="verbatim">   %; whizzy subsection -dvi "xdvi -s 3"
+</pre><p>
+It tells whizzytex to run in subsection slicing mode and use a <code>dvi</code>
+style viewer called with the command
+<code>xdvi -s 3</code>. This is also equivalent to
+</p><pre class="verbatim">   %; whizzy subsection -dvi xdvi -s 3
+</pre><p>
+since Emacs removes outer double-quotes in option arguments. </p><p>A more evolved configuration line is:
+</p><pre class="verbatim">   %; whizzy -mkslice make -initex iniptex -latex platex -fmt platex
+</pre><p>
+It tells WhizzyT<sub>E</sub>X to use <code>iniptex</code> and <code>platex</code> comands instead
+of <code>initex</code> and <code>latex</code> and to use the format file <code>platex.fmt</code> 
+instead of <code>latex.fmt</code>. Moreover, it should use <code>make</code> to preprocess
+the slice.</p></dd><dt class="dt-description"><span style="font-weight:bold">whizzy-paragraph</span></dt><dd class="dd-description"> <span style="font-family:monospace">regexp</span><br>
+This sets the Emacs variable <code>whizzy-paragraph</code> to <span style="font-family:monospace">regexp</span>.
+</dd></dl>
+<!--TOC subsection id="sec34" Modes-->
+<h3 id="sec34" class="subsection">5.3&#XA0;&#XA0;Modes</h3><!--SEC END --><p> 
+<a id="modes"></a></p><p>WhizzyT<sub>E</sub>X recognizes several modes,
+<code>slide</code>,
+<code>section</code>,
+<code>subsection</code>,
+<code>paragraph</code>,
+<code>document</code>, and
+<code>node</code>, described below.</p><p>The mode determines the slice of the document being displayed and indirectly
+the frequency of slicing.</p><p>Note that in any mode but <code>none</code> slices are always included in the file
+beeing editing or other files included. When slice delimitors are not
+found, the slice default to the whole file. The slice may also be empty if
+the cursor is located before <code>\begin{document}</code> or after
+<code>\end</code><code>{document}</code>.</p><dl class="description"><dt class="dt-description"><span style="font-weight:bold">slide</span></dt><dd class="dd-description"><p>The mode <code>slide</code> is mainly used for documents of the class seminar. 
+In slide mode, the slide is the text between two <code>\begin {slide}</code>
+comments (thus, the text between two slides is displayed after the
+preceding slide). </p><p>In slice modes, overlays are ignored <em>i.e.</em> all overlays all displayed in
+the same slide, unless a command
+<code>\overlay {</code><span style="font-style:italic">n</span><code>}</code> occurs on the left of the point, on the same line
+(if several commands are on the same line, the 
+right-most one is taken), in which case only layers <span style="font-style:italic">p</span> &#X2264; <span style="font-style:italic">n</span> are displayed.</p></dd><dt class="dt-description"><span style="font-weight:bold">section</span></dt><dd class="dd-description">
+In <code>section</code> mode, the slice of text is the current chapter, section.</dd><dt class="dt-description"><span style="font-weight:bold">subsection</span></dt><dd class="dd-description">
+As <code>section</code> but also slice at subsections. </dd><dt class="dt-description"><span style="font-weight:bold">paragraph</span></dt><dd class="dd-description">
+The <code>paragraph</code> mode is a variation on section mode where, the separator
+<code>whizzy-paragraph</code> is defined by the user (set to two empty lines by
+default) instead of using <code>\section</code> and <code>\subsection</code> commands. 
+subsection.</dd><dt class="dt-description"><span style="font-weight:bold">document</span></dt><dd class="dd-description">
+The <code>document</code> take the region between <code>\begin{document}</code>
+and <code>\end</code><code>{document}</code> as the slice. Hence it defaults to the file
+when the file is a slave, which does not contain <code>\begin{document}</code>. </dd><dt class="dt-description"><span style="font-weight:bold">none</span></dt><dd class="dd-description">
+In <code>none</code> slicing mode, there is no sectioning unit at all and
+the whole document is recompiled altogether. 
+Currently, pages are not turned to point and the 
+cursor is not shown as in <code>document</code> mode, because full documents are not
+sliced. (A slicing document mode could be obtained by working in paragraph
+mode, with an appropriate regexp.)</dd></dl>
+<!--TOC subsection id="sec35" Viewer types-->
+<h3 id="sec35" class="subsection">5.4&#XA0;&#XA0;Viewer types</h3><!--SEC END --><p>
+<a id="types"></a></p><p>See help for <code>whizzy-viewers</code>.</p><p>The previewer types can have three possible values:
+<span style="font-family:monospace">-advi</span>, <span style="font-family:monospace">-dvi</span>, <span style="font-family:monospace">-ps</span>, or <span style="font-family:monospace">-pdf</span>. </p><p>The previewer type should agree with the previewer command in several ways:
+</p><ul class="itemize"><li class="li-itemize">They tell how to trigger reload on the previewer. 
+This may signal the previewer with signal <span style="font-family:monospace">SIGHUP</span> for <span style="font-family:monospace">-ps</span>
+or <span style="font-family:monospace">SIGUSR1</span> for <span style="font-family:monospace">-dvi</span> and <span style="font-family:monospace">-advi</span>, or to establish the 
+previewer as a remote server with <span style="font-family:monospace">-pdf</span>.<p>In particular, if you write a front-hand shell-script <code>viewer</code> to the
+call previewer, and want to use <code>viewer</code> as the previewer, you should 
+arrange for <code>viewer</code> to understand these signals (and forward them to the
+previewer). The simplest way is to hand your script with an exec command
+calling the <code>gv</code>, <code>dvi</code> or <code>advi</code>.</p><p>Also, the option <span style="font-family:monospace">-pdf</span> assumes <span style="font-family:monospace">xpdf</span> remote server 
+(launched with the whizzytex process id as name) and its reload protocol. 
+Thus, if you wish to use another previewer, you also need to cutomize the
+variable <span style="font-family:monospace">RELOAD</span> of the shell-script. </p></li><li class="li-itemize">They tell whizzytex whether to process the slice to 
+Postscript (with <span style="font-family:monospace">-ps</span>) or to DVI format (with <span style="font-family:monospace">-dvi</span> and <span style="font-family:monospace">-advi</span> or directly generate <span style="font-family:monospace">pdf</span> output with <span style="font-family:monospace">pdflatex</span>.</li><li class="li-itemize">Moreover, <span style="font-family:monospace">-advi</span> requires the previewer to 
+recognize additional <code>\special</code> commands, in particular
+source line information of the form: 
+<blockquote class="quote">
+<pre class="verbatim">#line 780, 785 &lt;&lt;to&lt;&lt;rec&gt;&gt;&lt;&lt;ognize&gt;&gt;additional&gt;&gt; manual.tex
+</pre>
+</blockquote></li></ul><p>
+Then, the previewer command is the command to call the previewer. This
+string will be passed as such to the WhizzyT<sub>E</sub>X shell-script. Note that the
+name of the <code>dvi</code> or postscript file will be appended to the previewer
+command.</p>
+<!--TOC subsection id="sec36" Configuration via configuration files-->
+<h3 id="sec36" class="subsection">5.5&#XA0;&#XA0;Configuration via configuration files</h3><!--SEC END --><p>This is preferable to file-based configuration.
+WhizzyT<sub>E</sub>X also recognizes configuration files 
+<code>whizzy.sh</code>, <code>whizzy.sty</code>, <code>whizzy.el</code> 
+in either your home directory or the current working directory. </p><p>File <span style="font-family:monospace">whizzy.sh</span> is read by the script <span style="font-family:monospace">whizzytex</span> after some
+defaults values (usually determined by the configuration) have being
+assigned to variables. Hence, it can be used to redefined those values. </p><p>Here are typical default values that can be redefined. 
+</p><table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="text-align:left;white-space:nowrap" ><span style="font-weight:bold">Variable</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-weight:bold">default value</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-weight:bold">other value</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-weight:bold">Meaning
+</span></td></tr>
+<tr><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">LATEX</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">latex</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">elatex</span></td><td style="text-align:left;white-space:nowrap" >latex program 
+</td></tr>
+<tr><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">FORMAT</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">latex</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">elatex</span></td><td style="text-align:left;white-space:nowrap" >format basefile name
+</td></tr>
+<tr><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">FMT</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">fmt</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">efmt</span></td><td style="text-align:left;white-space:nowrap" >format extenstions
+</td></tr>
+<tr><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">DVICOPY</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">mv</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">dvicopy</span></td><td style="text-align:left;white-space:nowrap" >transformation <span style="font-style:italic">f</span><span style="font-family:monospace">.dvi</span> file into <span style="font-style:italic">f</span><span style="font-family:monospace">.wdvi</span>
+</td></tr>
+<tr><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">BIBTEX</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">bibtex</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">ebibtex</span></td><td style="text-align:left;white-space:nowrap" >bibtex program
+</td></tr>
+<tr><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">MKSLICE</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">defaultmkslice</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">.</span></td><td style="text-align:left;white-space:nowrap" >hook for preprocessing slices
+</td></tr>
+<tr><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">MKFILE</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">defaultmkfile</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">.</span></td><td style="text-align:left;white-space:nowrap" >hook for preprocessing files
+</td></tr>
+<tr><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">MAKEINDEX</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">makeindex</span></td><td style="text-align:left;white-space:nowrap" ><span style="font-family:monospace">.</span></td><td style="text-align:left;white-space:nowrap" >command for making index
+</td></tr>
+</table></td></tr>
+</table><p>
+See <span style="font-family:monospace">whizzytex</span> for other bindings. 
+Other shells environment values such as <span style="font-family:monospace">TEXINPUTS</span> may be defined
+here as well.</p><p>File "whizzy.el" is read by emacs when turning the whizzytex mode on for the
+first time. File "whizzy.sty" is read by latex every time the document is
+reformatted.</p><p>You may also use files 
+&#X27E8; <span style="font-style:italic">masterbasename</span>&#X27E9;<code>.wsh</code>, 
+&#X27E8; <span style="font-style:italic">masterbasename</span>&#X27E9;<code>.wel</code>, 
+&#X27E8; <span style="font-style:italic">masterbasename</span>&#X27E9;<code>.wsty</code>, 
+in the current working directory to only load the file when
+running whizzytex on the master file &#X27E8; <span style="font-style:italic">masterbasename</span>&#X27E9;. </p>
+<!--TOC subsection id="sec37" Watching other files-->
+<h3 id="sec37" class="subsection">5.6&#XA0;&#XA0;Watching other files</h3><!--SEC END --><p>
+<a id="sec/watch"></a></p><p>WhizzyT<sub>E</sub>X is designed to watch other files and not just the slice saved by
+Emacs. In fact, it watches any file dropped in the pool directory. 
+For instance, 
+if your source file uses images, you can just change the image and
+drop the new version in the pool. Then WhizzyT<sub>E</sub>X will pick the new version,
+move it to the working directory and recompile a new slice. Be aware of name
+clashes: if you drop a file in the pool, it will automatically be move to
+the working directory with the same name, overriding any file of the same
+name sitting there. </p><p>However, activity is entirely controlled by Emacs, since after every
+iteration WhizzyT<sub>E</sub>X waits for Emacs to send a new command (usually the empty
+command that means iterate again). Hence, other files will only be taken
+into account at the next iteration. If you really wish these files
+to be watched you need to instrument emacs to send and empty line input to
+the interaction buffer regularly, even when idle. </p>
+<!--TOC subsection id="sec38" Frequency of recompilation-->
+<h3 id="sec38" class="subsection">5.7&#XA0;&#XA0;Frequency of recompilation</h3><!--SEC END --><p>To obtain maximum WhizzyT<sub>E</sub>X effect, a new slice should be save after any
+edition changed or any displacement that outside of the current slice.
+However, to avoid overloading the machine with useless and annoying
+refreshments, some compromise is made, depending on Emacs several
+parameters: edition <em>v.s.</em> move Emacs last commands, 
+successful <em>v.s.</em> erroneous last slice, and the duration of last slice
+recompilation. This usually works well. However, different behavior may wish
+to be obtained in different situations. For instance, when editing on a
+lab-top, one may wish to save batteries by keeping the load rather low, hence
+not using the full power of the processor. Conversely, one may wish 
+WhizzyT<sub>E</sub>X to be as responsive as possible. There is an function
+<code>whizzy-load-factor</code> that control a variable of the same name, which can
+be used to adjust the responsiveness (by increasing or decreasing the
+load-factor). This simply adds extra delays between slicing. </p><p>The format is automatically recompiled at the beginning of each session, and
+whenever the buffer containing the file is saved. That is, to load new
+packages or define new global macros (before the <code>\begin{document}</code>), it
+suffices to save the current file.</p>
+<!--TOC subsection id="sec39" WhizzyT<sub>E</sub>X-ing macro files-->
+<h3 id="sec39" class="subsection">5.8&#XA0;&#XA0;WhizzyT<sub>E</sub>X-ing macro files</h3><!--SEC END --><p>Macro files can be <span style="font-weight:bold"><span style="color:blue">Whizzy</span></span><span style="font-weight:bold"><span style="color:blue">T<sub>E</sub>X</span></span>-ed as well. The effect is them only to
+automatically call <code>reformat</code> when the file is saved.
+Files can also be declared as macro-files with 
+<code>whizzy-macro</code> file configuration keyword (see Section <a href="#File-configuration">5.2</a>), which argument should then indicate the master file.
+Files with <code>.sty</code> extension are by default considered as macro files
+and their master file is guessed if possible.</p>
+<!--TOC subsection id="sec40" Cross-references, page and section numbers-->
+<h3 id="sec40" class="subsection">5.9&#XA0;&#XA0;Cross-references, page and section numbers</h3><!--SEC END --><p>The slice is always recompiled with the <code>.aux</code> file of the whole
+document. In paragraph mode, cross references and section numbers are 
+recompiled whenever the buffer itself is saved (manually). 
+The recompilation of the whole document is off in slide mode.</p>
+<!--TOC subsection id="sec41" Per session L<sup>A</sup>T<sub>E</sub>X customization-->
+<h3 id="sec41" class="subsection">5.10&#XA0;&#XA0;Per session L<sup>A</sup>T<sub>E</sub>X customization</h3><!--SEC END --><p>The Emacs variable <code>whizzy-customize</code> (that can be set
+interactively from the <code>Customize slice</code> menu) may contain
+a few L<sup>A</sup>T<sub>E</sub>X commands to be inserted at the beginning of each slice, which 
+allows a per-session customization. Customization can be easily changed
+anytime in the middle of a session. For instance, setting this variable to
+<code>\large</code> can be used to temporarily enlarge the text, while keeping the
+same page layout.</p><p><a id="custom"></a>
+</p>
+<!--TOC subsection id="sec42" System, user, and local customization-->
+<h3 id="sec42" class="subsection">5.11&#XA0;&#XA0;System, user, and local customization</h3><!--SEC END --><p> <a id="sec/local-custom"></a></p><p>WhizzyT<sub>E</sub>X is a three-part engine, with Emacs, Latex, and the glue
+Bash-script running altogether. Some of the parameters can be adjusted at
+installation-time by modifying the respective files <code>whizzytex.el</code>,
+<code>whizzytex.sty</code>, or <code>whizzytex</code> of the distribution. However, you
+should normally not have to do that after installation (and even only
+exceptionnally during installation), and instead use system, user, or local
+configuration files.</p><p>When launched, each engine looks for configuration files in appropriate
+directories with basenames <code>whizzy.el</code>, <code>whizzy.sh</code>, 
+<code>whizzy.sty</code> and <code>whizzy.cfg</code>, respectively. The Emacs configuration
+search path is defined by the emacs variable variable
+<code>whizzy-configuration-path</code>. Search path for Bash and Latex settings
+are composed of the directories <code>CONFIGDIR/</code>, <code>$HOME/.whizzytex/</code>
+and the current directory (actually <code>$TEXINPUTS</code> for latex). All
+configuration files found are loaded, in the order given above.
+The difference between <code>whizzy.sty</code> and <code>whizzy.cfg</code> is that the
+former is loaded after all latex packages and typically use to change the
+behavior of those packages while the later is loaded first,
+before <code>\documentclass</code> and is rather use used to redefined
+commands of "whizzytex" or defined extra macros before loading the
+document (e.g. as arguments that could normally be defined on the
+commandline while calling <code>latex</code>).</p><p>Remark that a local configuration file (<em>i.e.</em> one in the current
+directory) can be used to make per-document configuration by testing on 
+jobname.</p><p><a id="viewers"></a>
+</p>
+<!--TOC section id="sec43" Viewers-->
+<h2 id="sec43" class="section">6&#XA0;&#XA0;Viewers</h2><!--SEC END -->
+<!--TOC subsection id="sec44" Viewing with ActiveDVI-->
+<h3 id="sec44" class="subsection">6.1&#XA0;&#XA0;Viewing with ActiveDVI</h3><!--SEC END --><p><a href="http://gallium.inria.fr/advi/">ActiveDVI</a> is a DVI previewer with
+several additional features. 
+In particular, it recognizes extra specials, some of which are particular 
+useful for whizzytex that allows a two way communication between 
+the source Emacs buffer and the previewer: 
+</p><ul class="itemize"><li class="li-itemize">
+The previewer will automatically turn pages for you, as you are editing. 
+This is done by telling Emacs to save the current position in the slice. 
+Then, the recompilation of the slice will include the current position 
+as an hyperref location <code>Start-Document</code> whenever possible. 
+Then, just tell ActiveDVI to automatically jump at this location
+when it opens/reloads the file (option -html Start-Document).</li><li class="li-itemize">Conversely, ActiveDVI can dump source file positions on clicks, 
+when available (usually on <code>shift-mouse-1</code> or <code>mouse-1</code> in
+<code>edit</code> mode), that
+is forwarded to Emacs so that it can move to the corresponding line.<p>To enjoy this feature, the option <code>-advi</code> should be used instead of
+<code>-dvi</code>. This will produce extra information (such as source line
+numbers) using <code>\special</code> that most DVI previewers do not recognize
+and may complain about.</p></li><li class="li-itemize">ActiveDVI does not currently recognizes virtual fonts, but <code>dvicopy</code> 
+can be used to expand them. See the option <code>-dvicopy</code> in Section&#XA0;<a href="#sec%2Fdvicopy">5.2</a>. </li><li class="li-itemize">If you have a recent version of ActiveDVI (version number exists and is
+greater than 1.5.2), you can also enjoy the multiple view mode, which is
+configured by default (variable <code>MULTIPLE</code> is set to <code>true</code> in
+Makefile.config). In this case, <span style="font-weight:bold"><span style="color:blue">Whizzy</span></span><span style="font-weight:bold"><span style="color:blue">T<sub>E</sub>X</span></span> will call the previewer both
+the slice and the whole document in the same window and may automatically
+switch from the slice to the whole document when clicking on local hyperrefs
+that are out of the slice (press <code>Esc</code> to come back). You can also
+switch between views by pressing <code>w</code> and when on the whole document
+view, goto the page when the cursor is in Emacs by pressing <code>W</code>. <p><em>Warning! If by mistake or misconfiguration, the multiple view is
+enable and your version of advi does not support multiple views, you
+will only see the full document view and never see the slice. </em>
+</p></li></ul>
+<!--TOC subsection id="sec45" Defining your own previewer-->
+<h3 id="sec45" class="subsection">6.2&#XA0;&#XA0;Defining your own previewer</h3><!--SEC END --><p>To use your own command as a previewer, you must choose either type
+<code>-dvi</code> or <code>-ps</code> . In particular, your previewer should 
+accept <code>SIGUSR1</code> (for <code>-dvi</code>) signal or <code>SIGHUP</code> (for <code>-ps</code>) 
+signal and respond by reloading the file.</p><p><a id="pdf"></a>
+</p>
+<!--TOC subsection id="sec46" Viewing with <span style="font-family:monospace">xpdf</span>-->
+<h3 id="sec46" class="subsection">6.3&#XA0;&#XA0;Viewing with <span style="font-family:monospace">xpdf</span></h3><!--SEC END --><p>WhizzyT<sub>E</sub>X also works with <code>pdf</code> using the <code>xpdf</code> previewer
+and its remote server capabilities to reload the file and jump to the
+cursor position (this does not work with <code>acroread</code> because they is no
+simple way to tell 
+<code>acroread</code> to reload its file in batch). You must choose <code>-pdf</code> 
+as previewer type, which will also set other variables so as to compile the
+document with pdflatex instead of latex. You must leave the default
+previewer command, i.e. enter <code>-pdf .</code> and not <code>-pdf xpdf</code> (or else
+understand the internals of the <code>whizzytex</code> script) because
+other options need to be passed to <code>xpdf</code>.</p><p>When compiling with <code>pdflatex</code>, you need to explicitly use the package
+<code>hyperref</code>. </p><p>Another solution is to compile via the generation of a Postscript file
+<code>ps</code> and its translation to PDF using <code>ps2pdf</code>. 
+This allows the use of <code>pstricks</code>. In this case, you tune the
+configuration manually, following the example given in <code>examples/ps2pdf/</code>. </p>
+<!--TOC section id="sec47" Whizzy Effects-->
+<h2 id="sec47" class="section">7&#XA0;&#XA0;Whizzy Effects</h2><!--SEC END --><p>Since WhizzyT<sub>E</sub>X knowns about the current point in the buffer, rendering
+of the document may depend on that possition. For examples, an environment
+may be displayed differently when the point is inside or outside the
+environment. A natural choice is to make drawer-like environments that 
+are <em>closed</em> when the point is outside and <em>open</em> when the point
+is inside.</p><p>WhizzyT<sub>E</sub>X provides a the macro <code>\WhizzyInsideEnvironment</code>
+to help make such effects. It takes the same parameters as the command
+<code>\newenvironnement</code>. The first argument should be the name of an
+existing environment, which will behave as before when the point appears
+outside and according to the new definition when the points is inside. The
+second and first arguments defines the behavoir as do the arguments of
+<code>\newenvironment</code>. However, <code>\WhizzyInsideEnvironment</code> also defines
+the macro <code>\out@myenv</code> and <code>endout@myenv</code> to refers to the
+cursor-outside version of the environment. Typically, these macros can be
+used in the second and third argument of <code>\WhizzyInsideEnvironment</code> to
+define the cursor-inside version by difference with the cursor-outside
+version. </p><p>The example <code>effects</code> shows two applications. First, a <code>drawer</code>
+environment is used to delimit sections and make them open or closed
+automatically as cursor moves. Second, using the
+<span style="font-family:monospace">exercise</span> package, we provide a cursor-inside version of the answer
+environment that inline the answer rather than pushing it to the Appendix. </p><p><a id="edit"></a>
+</p>
+<!--TOC section id="sec48" WhizzyEditing-->
+<h2 id="sec48" class="section">8&#XA0;&#XA0;WhizzyEditing</h2><!--SEC END --><blockquote class="quote">
+<em>This feature requires at least version </em><em><span style="font-family:monospace">1.60</span></em><em> of
+</em><em>ActiveDVI</em><em>.
+</em></blockquote><p>When used together with Active-DVI, WhizzyT<sub>E</sub>X can be made much mode
+powerful. In particular, it is not difficult to lift WhizzyT<sub>E</sub>X from an
+incremental viewer to an assistant editor.</p><p>What was a dream has now become real.
+The latest version Active-DVI provides a notion of active boxes. 
+The DVI may be annotated with <code>advi: edit</code> specials commands. 
+When ActiveDVI is put in edition mode,
+active boxes are drawn on top of the previewer window and can be move or
+resized with the mouse. 
+When the mouse is released, the new size or position is printed on standard
+output together with the action to be taken and received by emacs watching
+the output.
+Emacs has then enough information to adjust some dimensional parameters in
+the source buffer. Just after this edition, the new slice is processed and
+the new position is displayed. Thanks to the short incremental loop, this
+almost appears as if actions where executed by Active-DVI itself.</p><p>Indeed, WhizzyEditing is not meant to break up the structual edition
+philosophy of T<sub>E</sub>X and L<sup>A</sup>T<sub>E</sub>X. Its incremental viewing is an assistant
+to an not a replacement of structural source edition. Mouse editing should
+also be seen similarly. In particular, all editions are visible in the
+emacs source buffer, can be saved, manually changed or disable. Moreover,
+Whizzy-editing is not meant for document layout (even it can occassionally
+be used for that, <em>e.g.</em> in slides), but rather to help adjust
+dinmensions that require manual tuning.</p><p>For instance, imaging you are importing an Encapsulated Postscript picture
+you would like to place some bubble whose origin must be position precisely
+inside the picture. Then, you&#X2019;d better do it with the mouse rather than by
+small measurements or adjustements. Drawing a graph with a few nodes may now
+become quite confortable with PStricks, with the advantage of remaining
+within L<sup>A</sup>T<sub>E</sub>X rather than using some external tool. Finally,
+Whizzy-editing is likely to be convenient when writting slides with visual
+gadgets. For instance, adjusting bubbles with the mouse is likely to be more
+efficient than doing it by hand.</p>
+<!--TOC subsection id="sec49" Enabling edition with the <span style="font-family:monospace">\adviedit</span> macro-->
+<h3 id="sec49" class="subsection">8.1&#XA0;&#XA0;Enabling edition with the <span style="font-family:monospace">\adviedit</span> macro</h3><!--SEC END --><p>ActiveDVI provides one general editing command that can be used by
+<span style="font-weight:bold"><span style="color:blue">Whizzy</span></span><span style="font-weight:bold"><span style="color:blue">T<sub>E</sub>X</span></span> for all mouse editing. The syntax of this command is
+</p><blockquote class="quote">
+<span style="font-family:monospace">\adviedit</span>[tag]<span style="font-family:monospace">{</span>&#X27E8; <em>options</em>&#X27E9;<span style="font-family:monospace">}</span><span style="font-family:monospace">{</span>&#X27E8; <em>body</em>&#X27E9;<span style="font-family:monospace">}</span>
+</blockquote><p>
+where &#X27E8; <em>options</em>&#X27E9; is a comma separated list of bindings
+according to the <span style="font-family:monospace">keyval</span> package. Each binding is either of the form
+&#X27E8; <em>var</em>&#X27E9;=&#X27E8; <em>float</em>&#X27E9; where 
+&#X27E8; <em>var</em>&#X27E9; ranges other letters 
+<span style="font-family:monospace">x</span>, <span style="font-family:monospace">y</span>, <span style="font-family:monospace">h</span>, <span style="font-family:monospace">w</span>, <span style="font-family:monospace">d</span> 
+in lowercase or uppercase, or <span style="font-family:monospace">field</span>=&#X27E8; <em>dimension</em>&#X27E9; where 
+&#X27E8; <em>field</em>&#X27E9; ranges over &#X27E8; <em>unit</em>&#X27E9; and &#X27E8; <em>min</em>&#X27E9;.</p><p>The &#X27E8; <em>field</em>&#X27E9; respectively bindings specifies the unit, which default to
+<span style="font-family:monospace">1em</span>, and the minimal dimension of boxes. Both fields are inherited,
+which enable inner edition to be scale altogether. The &#X27E8; <em>var</em>&#X27E9; bindings
+defines values for the corresponding variables. 
+The are not inherited. On the opposite, they are always reset to
+default values. Lowercase letters mean that the corresponding variables
+are whizzy-editable, while uppercase letters treat them as constants. 
+The expression <span style="font-family:monospace">body</span> should be horizontal box material: it is then
+placed in an <span style="font-family:monospace">\hbox</span> at coordinates (<span style="font-family:monospace">x</span>, <span style="font-family:monospace">y</span>)
+relatively to the current position. 
+Moreover, a virtual box of width <span style="font-family:monospace">w</span>, height <span style="font-family:monospace">h</span>, and depth d is draw at that position when editing is made active.
+The box can this float around the current point and has no dimension.
+However, a box with no coordinates specified is fixed and has the dimensions 
+of <span style="font-family:monospace">w</span>, <span style="font-family:monospace">h</span>, and <span style="font-family:monospace">d</span>. When not specified, these fields takes
+the value of the box in which body is typeset. 
+All dimensions <span style="font-family:monospace">x</span>, <span style="font-family:monospace">y</span>, <span style="font-family:monospace">w</span>, <span style="font-family:monospace">h</span>, and <span style="font-family:monospace">d</span> are
+bound to <span style="font-family:monospace">advix</span>, <span style="font-family:monospace">advix</span>, <span style="font-family:monospace">adviy</span>, <span style="font-family:monospace">adviw</span>,
+<span style="font-family:monospace">advih</span>, and <span style="font-family:monospace">advid</span> macros during the evaluation of
+&#X27E8; <em>body</em>&#X27E9;. </p><p>Whizzy-editable objects can be nested. All parameters are reset to default
+values, within the new object. Sometimes, emacs may be confused and take an
+object for another. In these rare cases, the two objects can use the 
+&#X27E8; <em>tag</em>&#X27E9; argument to be distinguished. This argument does nothing but
+being passed to ActiveDVI and sent back to Emacs to identified 
+the object exactly. </p>
+<!--TOC subsection id="sec50" Performing mouse edition under ActiveDVI control-->
+<h3 id="sec50" class="subsection">8.2&#XA0;&#XA0;Performing mouse edition under ActiveDVI control</h3><!--SEC END --><blockquote class="quote"><em>This section depends entirely on </em><em>ActiveDVI</em><em>. Hence, it may depend on your
+version of </em><em>ActiveDVI</em><em> or how you have parameterized it. The appearance
+and description below is based on default bindings for version
+</em><em><span style="font-family:monospace">1.50+3</span></em><em>.
+</em></blockquote><p>To actually <em>edit</em> whizzy-editable objects, you need to toggle the
+<em>edit</em> mode of ActiveDVI. You can do this interactively by key stoke
+<code>e</code> in the ActiveDVI window. You may also start ActiveDVI in
+<em>edit</em> mode by passing the option <span style="font-family:monospace">-edit</span>.</p><p>When in edit mode, whizzy-editable objects are drawn as below:
+</p><div class="center">
+<img src="whizzytex001.png"></div><p>You may edit such objects in two ways: 
+</p><ul class="itemize"><li class="li-itemize">
+<span style="font-weight:bold">move</span> them, using the middle button.
+</li><li class="li-itemize"><span style="font-weight:bold">resize</span> them, using the right button for width and height
+or the shift-right button for depth.
+</li></ul><p>
+When pressing the button on the corresponding rectangle, the mouse shape
+should intuitively illustrate the action to be perfomed. 
+However, some actions may be inhibited. For instance, the
+<span style="font-family:monospace">\parbox</span> can only be moved or resized in width and the
+vertical space can only be resized in depth but not be moved. When an
+action (either <em>move</em> or <em>resize</em>) is disable in all directions,
+the cursor will not changed. When resizing is enabled both in <em>height</em>
+and in <em>depth</em>, the default action is <em>height</em> and you must press
+the shift key to perform the <em>depth</em> resizing.</p><p>Finally, an edition can be aborted by pressing the <em>meta</em> key (actually
+the one bound to <em>modifier-1</em>) while release the mouse. </p>
+<!--TOC subsection id="sec51" Examples-->
+<h3 id="sec51" class="subsection">8.3&#XA0;&#XA0;Examples</h3><!--SEC END --><p>
+Several examples can be found in file <span style="font-family:monospace">example/edit/main.tex</span> coming with
+ActiveDVI distribution. Here are a couple of simple ones. 
+For example, 
+</p><pre class="verbatim">        \adviedit{x=-2.8845,y=0.2717}{A}
+</pre><p>
+will simply place make the letter <span style="font-style:italic">A</span> whizzy-movable. 
+The values of <span style="font-style:italic">x</span> and <span style="font-style:italic">y</span> when unspecified defaults to 0. 
+Values for <span style="font-style:italic">W</span>, <span style="font-style:italic">H</span> or <span style="font-style:italic">D</span> when not given, will default to the
+value of A. However, if <span style="font-style:italic">W</span>, <span style="font-style:italic">H</span>, or <span style="font-style:italic">D</span> are zero (or too small)
+they will default to some small value.
+</p><pre class="verbatim">        \adviedit{X=2,Y=3}{A}
+</pre><p>
+can simply be used instead of the latex \put command.
+Spaces are also whizzy-adjustables: an horizontal space is just
+</p><pre class="verbatim">        \adviedit{w}{\hspace{\adviw}}
+</pre><p>
+Note that the material is placed into a default <span style="font-family:monospace">\hbox</span>. 
+Thus, for vertical spaces, one need and explicit <span style="font-family:monospace">\vbox</span>:
+</p><pre class="verbatim">        \adviedit{d}{\vtop {\vspace {\advid}}}
+</pre><p>
+Note that 
+</p><pre class="verbatim">        \adviedit{h}{\vbox {\vspace {\advih}}}
+</pre><p>
+would do as well, but would usually be less intuitive, graphically.</p><p>A paragraph of adjustable size: 
+</p><pre class="verbatim">        \adviedit{w}{\parbox[c]{\adviw}{text material}}
+</pre><p>
+Whizzy-edition can also be used to resize images (as well as return them)
+</p><pre class="verbatim">        \adviedit{w,h}{\includegraphics[width=\adviw,height=\advih]{caml.eps}}
+</pre><p>
+Note that while \adviedit must remain in the should, hence the
+whole line cannot be abbreviated into a macro, one can freely abbreviate its
+body, and it is quite easy to build a camel caravan: 
+</p><pre class="verbatim">        \adviedit[A]{w,unit=\hsize}{%
+          \setedit{unit=0.2\adviw}%    
+          \def \camel{\includegraphics[width=\adviw,height=\advih]{caml.eps}}%
+          \adviedit{x,y,w,h}{\camel}%
+          \adviedit{x,y,w,h}{\camel}%
+          \adviedit{x,y,w,h}{\camel}%
+          \adviedit{d}{\vtop{\vspace\advid}}% 
+          \hspace{\adviw}% 
+        }
+</pre><p>
+Be aware that a camel may hide another one! Indeed, at the beginning all
+camels are superposed. The first caml you pick is the one in front. 
+An interesting use of units is to let an inner editable command sets its
+unit according to the dimension of an outer command, as illustrated above.
+Here the outer object (tagged <span style="font-family:monospace">A</span>) is used to control the origin
+and scale of the projection. Then, each camel can be translated and
+resized, but relatively to this origin and this scale. Thus moving 
+of rescaling the outer object will treate the caravan as a whole.
+The last line allow expansion of the bounding box as needed. 
+The one before last sets the vertical ratio of the bounding box.
+The result can be seen in Figure&#XA0;<a href="#caravan">1</a>. 
+</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></div>
+<div class="center"><img src="whizzytex002.png"></div>
+<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 1: <a id="caravan"></a>A Whizzy-editable Camel Caravan</td></tr>
+</table></div>
+<div class="center"><hr style="width:80%;height:2"></div></blockquote><p>
+Below is another example with two circles:
+</p><pre class="verbatim">        \adviedit[A]{w=4}
+          {\setedit{unit=\adviw}%
+           \psset{boxsep=0pt,framesep=0pt}%
+           \hbox to \adviw
+             {\circlenode{A}{\hspace {\adviw}}\hss
+              \adviedit[B]{w=0.5}{\circlenode{B}{\hspace{\adviw}}}}}
+</pre><p>
+Many L<sup>A</sup>T<sub>E</sub>X commands such as <span style="font-family:monospace">\hspace</span>,
+<span style="font-family:monospace">\parbox</span>, <em>etc.</em> are parameterized by dimensions.
+However, some other commands, such as <span style="font-family:monospace">\picture</span>, 
+<span style="font-family:monospace">\pspicture</span> and most PsTricks commands,
+<span style="font-family:monospace">\bubble</span>, and <span style="font-family:monospace">\adviedit</span> itself are
+parameterized by a coefficients (floats) and, separately, a dimension. </p><p>To whizzy-edit such coefficients, there are also commands
+<span style="font-family:monospace">\advicx</span>,
+<span style="font-family:monospace">\advicy</span>,
+<span style="font-family:monospace">\advicw</span>,
+<span style="font-family:monospace">\advich</span>, and 
+<span style="font-family:monospace">\advicd</span> that contain the float ratio of 
+the corresponding dimension with respect to
+<span style="font-family:monospace">\adviunit</span>&#X2014;whenever the dimension is itself defined.
+As an example, the position of bubble can whizzy-edited as follows:
+</p><pre class="verbatim">        \adviedit{h=1.8902,w=1.5259,unit=\bubbleunit}
+          {\bubble{anchored text}(\advicw,\advich){bulle text}}
+</pre>
+<!--TOC subsection id="sec52" Writing whizzy-editable macros-->
+<h3 id="sec52" class="subsection">8.4&#XA0;&#XA0;Writing whizzy-editable macros</h3><!--SEC END --><p>Although the command <span style="font-family:monospace">\whizzyedit</span> is quite general and
+powerful, the user may wish to write its own versions. 
+One must then be careful that the macro correctly passes its name to 
+ActiveDVI. For instance, rebinding or partially evaluating the macro
+<span style="font-family:monospace">\adviedit</span> does not work, since then the text-source macro
+will not be <span style="font-family:monospace">\adviedit</span> anymore. See the latex
+<span style="font-family:monospace">advi.sty</span> source package for envolved examples. </p><p>Below are just a couple of simple examples. 
+We can abbreviate the example of adjustable horizontal spaces defining the
+following macro: 
+</p><pre class="verbatim">        \newcommand{\advihspace}[1]
+           {\adviedit{comm=\advihspace,#1}{\hspace{\adviw}}}
+</pre><p>
+The argument <code>comm=\advihspace</code> set the name of the calling source text
+macro to <code>\advihspace</code>. Then, you may simply write: 
+</p><pre class="verbatim">        \advihspace{w}
+</pre><p>
+instead of 
+</p><pre class="verbatim">        \adviedit{w}{\hspace{\adviw}}
+</pre><p>
+The macro could additionally check that <code>w</code> is indeed defined.</p><p>Another example of specialization is to place bubbles: so as to be more
+intuitive, the orgin of the edition should start at the center rather then
+at the left of the anchor, which requires a small acrobatics with boxes and
+dimensions: 
+</p><pre class="verbatim">        \newcommand{\editbubble}[3]
+           {\setbox0=\hbox{#2}\copy0\hbox to 0em {\kern-0.5\wd0\relax
+            \bbb@dima=\ht0\bbb@dimb=\dp0
+            \setbox0=\null\ht0=\bbb@dima\dp0=\bbb@dimb
+              {\adviedit{comm=\editbubble,unit=\bubbleunit,#1}
+                 {\bubble{\box0}(\advicw,\advich){#3}}}\hfilneg}}
+</pre><p>
+Then a nicely editable bublle can be obtained with
+</p><pre class="verbatim">        \editbubble{w,h}
+          {\editbubble{w,h}
+            {\editbubble{w,h}{flowers}{First}}
+            {Second}}
+          {third}
+</pre><p>
+(See the result in Figure&#XA0;<a href="#flowers">2</a>)
+</p><blockquote class="figure"><div class="center"><hr style="width:80%;height:2"></div>
+<table class="display dcenter"><tr style="vertical-align:middle"><td class="dcell"><img src="whizzytex003.png">
+</td></tr>
+</table>
+<div class="caption"><table style="border-spacing:6px;border-collapse:separate;" class="cellpading0"><tr><td style="vertical-align:top;text-align:left;" >Figure 2: <a id="flowers"></a>A bubble flower</td></tr>
+</table></div>
+<div class="center"><hr style="width:80%;height:2"></div></blockquote><p><a id="impl"></a>
+</p>
+<!--TOC section id="sec53" A quick overview of the implementation-->
+<h2 id="sec53" class="section">9&#XA0;&#XA0;A quick overview of the implementation</h2><!--SEC END --><p>In short, <span style="font-variant:small-caps">Whizzy</span><span style="font-variant:small-caps">T<sub>E</sub>X</span> is selecting a small slice of the document that 
+you are editing around the cursor (according to the selected mode) 
+and redisplay the slice incrementally as it changes through edition. 
+</p><ul class="itemize"><li class="li-itemize"><span style="font-weight:bold">Emacs is watching you</span> typing and moving in the 
+Emacs buffer attached to the L<sup>A</sup>T<sub>E</sub>X source file that your editing and keeps
+saving the current slice (current slide, section, or subsection, according
+to the mode).</li><li class="li-itemize"><span style="font-weight:bold">A shell-script daemon</span>
+keeps recompiling whenever a new slice (or other files) are produced, and if
+recompilation succeeds, tels the previewer to updates the display of the slice.</li><li class="li-itemize"><span style="font-weight:bold">A few </span><span style="font-weight:bold">L<sup>A</sup>T<sub>E</sub>X</span><span style="font-weight:bold"> macros</span> allow to build a specialized
+format with all macro loaded, which considerably speed up the time for
+slicing. Additionally, the slice is a bit instrumented to show the cursor,
+and includes specials that allows back-pointing from the DVI file into the
+Emacs buffer.</li></ul><p>
+The rest of this section briefly describe these three parts<sup><a id="text3" href="#note3">2</a></sup>, and
+their interactions.</p>
+<!--TOC subsection id="sec54" Emacs code-->
+<h3 id="sec54" class="subsection">9.1&#XA0;&#XA0;Emacs code</h3><!--SEC END --><p>The main trick is to use <code>post-command-hook</code> to make Emacs watch
+changes. It uses <code>buffer-modified-tick</code> to tell if any editing has
+actually occurred, and compare the point position with the (remembered)
+position of the region being displayed to see if saving should occur. It
+uses <code>sit-for</code> to delay slicing until at least the time of slice
+computation has ellapsed since last saving, a significant number of editing
+changes has occurred, or iddleness.</p><p>WhizzyT<sub>E</sub>X can also display the cursor position, in which case slices are
+also recomputed when the cursor moves, but with lower priority.</p>
+<!--TOC subsection id="sec55" L<sup>A</sup>T<sub>E</sub>X code-->
+<h3 id="sec55" class="subsection">9.2&#XA0;&#XA0;L<sup>A</sup>T<sub>E</sub>X code</h3><!--SEC END --><p>The main TeX trick is to build a format specialized to the current
+document so as to avoid reloading the
+whole macros at each compilation. This is (almost<sup><a id="text4" href="#note4">3</a></sup>) entirely transparent, that is, the source file does not have
+to understand this trick.</p><p>This is implemented by redefining <code>\documentclass</code> which in turn
+redefines <code>\document</code> to execute <code>\dump</code> (after redefining
+<code>\document</code> to its old value and <code>\documentclass</code> so that it skips
+everything till <code>\document</code>). This is robust &#X2014;and seems 
+to work with rather complex macros. </p><p>The specialized format can be used in two modes: by default it expects a
+full document: it them dumps counters at sectioning commands (chapters, 
+sections, and subsections). This is useful to correctly 
+numberred sections and pages on slices. </p><p>There are also a a few other used to get more advanced behavior, especially
+to dump source line numbers and file names so that the previewer can
+transform clicks into source file positions. </p><p>When building the format, WhizzyT<sub>E</sub>X also look for a local file of name
+<code>whizzy.sty</code>, which if existing is loaded at the end of the macros. 
+This may be used to add other macros in whizzy mode, <em>e.g.</em> 
+some T<sub>E</sub>X environments may be redefined to changed they type setting,
+according to whether the current line is inside or outside the environment. 
+(We have written such an extension for an exercise package that sends the
+answers at the end in an appendix, unless the cursor is inside the answer,
+in which case the answer is in-lined.)</p>
+<!--TOC subsection id="sec56" Bash code-->
+<h3 id="sec56" class="subsection">9.3&#XA0;&#XA0;Bash code</h3><!--SEC END --><p>There is no real trick there. This is a shell-script watching the pool
+(a directory where slices and other new version of files must be dropped). 
+It them recompiles a slice and wait for input (in stdin). 
+It recognizes a few one-line commands as input <span style="font-family:monospace">reformat</span>, <span style="font-family:monospace">dupplex</span>, and by default just watch for the presence of a new slice. 
+It recompiles the format file (and the page and section number, but in batch
+mode) whenever the source file (its Unix date) has changed and 
+recompiles the slice whenever it is present (since WhizzyT<sub>E</sub>X renames &#X2014;hence
+removes&#X2014; the slice before processing it).</p><p>If the file has been recompiled successfully, it triggers the previewer
+(ghostscript or xdvi) so that it rereads the dvi or ps file. Otherwise, it
+processes the T<sub>E</sub>X log file and tries to locate the error. It then sends part
+of the log file with annotations to the <code>*TeX-shell*</code> buffer from which
+Emacs has been WhizzyT<sub>E</sub>X, so that Emacs can report the error. </p>
+<!--TOC subsection id="sec57" Interaction between the components-->
+<h3 id="sec57" class="subsection">9.4&#XA0;&#XA0;Interaction between the components</h3><!--SEC END --><p>The control is normally done by Emacs, which launches and kills the Unix
+daemon. Quitting the previewer should be noticed by the daemon, which tells
+Emacs to turn mode off before exiting. </p><p>Muliple WhizzyT<sub>E</sub>X running on the same file would certainly raise racing
+conditions between files and would not make sense. 
+For that purpose, the daemon pid is saved in a file and WhizzyT<sub>E</sub>X
+will kill any old WhizzyT<sub>E</sub>X process on startup. </p>
+<!--TOC subsection id="sec58" Whizzy edition-->
+<h3 id="sec58" class="subsection">9.5&#XA0;&#XA0;Whizzy edition</h3><!--SEC END --><p>The macros <span style="font-family:monospace">\adviedit</span> passes information
+to ActiveDVI inside <span style="font-family:monospace">edit</span> specials. This information is used to
+identify the source file command that requested some edition and is passed
+by from ActiveDVI to emacs as command strings of the form: 
+</p><blockquote class="quote">
+<pre class="verbatim">&lt;edit "\adviedit" ""[x=1.2001]" #56 @main.tex moveto 5.1529,-1.1708&gt;
+</pre>
+</blockquote><p>
+This command emitted by ActiveDVI in its standard output is thus received by
+emacs via <span style="font-weight:bold"><span style="color:blue">Whizzy</span></span><span style="font-weight:bold"><span style="color:blue">T<sub>E</sub>X</span></span> in the process buffer associated to the current
+session. </p><p>Emacs interprets such commands starting with the &#X201C;<code>&lt;edit </code>&#X201D; prefix 
+as whizzy edition commands. In the above example, the string
+<code>\adviedit</code> is a latex commands that should be present the master
+buffer <code>main.tex</code> at line <code>56</code> and with x coordinate equal to
+<span style="font-family:monospace">1.2001</span>. Its <span style="font-family:monospace">x</span> and <span style="font-family:monospace">y</span> coordinates should be 
+changed by <span style="font-family:monospace">5</span>.1529 and <span style="font-family:monospace">-1.1708</span>. Usually, the command can be
+precisely located by its line position in the buffer and one significant
+coordinates. In case of conflict, a tag optional argument pass
+<span style="font-family:monospace">\adviedit</span> will be passed to ActiveDVI and then sent back
+to emacs (which is filled in the empty string above).</p><!--BEGIN NOTES document-->
+<hr class="footnoterule"><dl class="thefootnotes"><dt class="dt-thefootnotes">
+<a id="note1" href="#text1">*</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">WhizzyT<sub>E</sub>X is free software, 
+Copyright &#XA9;2001, 2002, 2003, 2004, 2010, 2011, 2013, 2020 INRIA
+and distributed under the GNU General Public License
+(See the COPYING file enclosed with the distribution).</div></dd><dt class="dt-thefootnotes"><a id="note2" href="#text2">1</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">It has 
+been reported to successfully work on Windows under Cygwin&#X2014;See the 
+<a href="FAQ.html">FAQ</a>.</div></dd><dt class="dt-thefootnotes"><a id="note3" href="#text3">2</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">This
+section is not quite up-to-date, hence it puts emphasis on the original
+design, but several aspects have changed significantly since the first
+version. Implementation of more recent features is thus omitted.</div></dd><dt class="dt-thefootnotes"><a id="note4" href="#text4">3</a></dt><dd class="dd-thefootnotes"><div class="footnotetext">\<span style="font-family:monospace">begin{document}</span> should be typed as such without any white
+white space</div></dd></dl>
+<!--END NOTES-->
+<!--CUT END -->
+<!--HTMLFOOT-->
+<!--ENDHTML-->
+<!--FOOTER-->
+<hr style="height:2"><blockquote class="quote"><em>This document was translated from L<sup>A</sup>T<sub>E</sub>X by
+</em><a href="http://hevea.inria.fr/index.html"><em>H</em><em><span style="font-size:small"><sup>E</sup></span></em><em>V</em><em><span style="font-size:small"><sup>E</sup></span></em><em>A</em></a><em>.</em></blockquote></body>
+</html>
